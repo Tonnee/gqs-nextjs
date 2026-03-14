@@ -1,11 +1,11 @@
-import Banner from "./_sections/Banner";
-import Reviews from "./_sections/Review";
-import UpcomingBatches from "./_sections/UpcomingBatches";
-import DemoClasses from "@/app/_sections/DemoClasses";
-import MasterPieces from "./_sections/master-pieces";
-import VisitChannel from "@/app/_sections/VisitChannel";
-import Contact from "@/app/_sections/Contact";
-import HomeFaq from "@/app/_sections/HomeFaq";
+import Banner from "@/features/home/components/banner";
+import Reviews from "@/features/home/components/review";
+import UpcomingBatches from "@/features/home/components/upcoming-batches";
+import DemoClasses from "@/features/home/components/demo-classes";
+import MasterPieces from "@/features/home/components/master-pieces";
+import VisitChannel from "@/features/home/components/visit-channel";
+import Contact from "@/features/home/components/contact";
+import HomeFaq from "@/features/home/components/home-faq";
 
 export default function Home() {
     return <>

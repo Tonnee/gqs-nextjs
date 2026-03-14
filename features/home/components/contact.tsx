@@ -1,7 +1,7 @@
-import {Container} from "@/components/layout/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
-import CenterText from "@/components/layout/CenterText";
-import IconText from "@/components/ui/IconText";
+import { Container } from "@/components/layout/container";
+import SectionHeading from "@/components/ui/section-heading";
+import CenterText from "@/components/layout/center-text";
+import IconText from "@/components/ui/icon-text";
 import { MdCall } from "react-icons/md";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import { RiMailSendFill } from "react-icons/ri";

@@ -1,4 +1,9 @@
-export const NAV_LINKS = [
+export interface NavLink {
+    name: string;
+    href: string;
+}
+
+export const NAV_LINKS: NavLink[] = [
     { name: "Home", href: "/" },
     { name: "Course Details", href: "/course-details" }, // Active state demo
     { name: "KMF Questions", href: "/kmf-questions" },

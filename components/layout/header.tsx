@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Container } from "../layout/Container";
+import { Container } from "./container";
 import { Announcement, defaultLeft, defaultRight } from "@/data/announcements";
 import { cn } from "@/lib/utils";
 

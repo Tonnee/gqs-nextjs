@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins, Raleway } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/ui/Header";
-import { Navbar } from "@/components/ui/Navbar";
-import Footer from "@/components/layout/Footer";
+import { Header } from "@/components/layout/header";
+import { Navbar } from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
+import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
     variable: "--font-poppins",
@@ -29,7 +30,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${poppins.variable} ${raleway.variable}`}>
+        <html lang="en" className={cn(poppins.variable, raleway.variable)}>
             <body
                 className="font-sans antialiased"
             >

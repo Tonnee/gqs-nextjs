@@ -1,7 +1,9 @@
 import { cn } from "@/lib/utils";
 
+import { HeadingLevel } from "@/types";
+
 export interface HeadingProps {
-    level: 1 | 2 | 3 | 4 | 5 | 6;
+    level: HeadingLevel;
     children: React.ReactNode;
     className?: string;
 }

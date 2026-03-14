@@ -1,5 +1,5 @@
-import {Container} from "@/components/layout/Container";
-import {CtaButton} from "@/components/layout/CtaButton";
+import { Container } from "@/components/layout/container";
+import { CtaButton } from "@/components/layout/cta-button";
 
 export default function VisitChannel() {
     return (

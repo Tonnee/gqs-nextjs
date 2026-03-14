@@ -1,6 +1,6 @@
-import BatchCard from "@/components/ui/BatchCard";
-import {Container} from "@/components/layout/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
+import BatchCard from "./batch-card";
+import { Container } from "@/components/layout/container";
+import SectionHeading from "@/components/ui/section-heading";
 import { batchData } from "@/data/batch-data";
 
 export default function UpcomingBatches() {

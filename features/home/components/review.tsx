@@ -1,9 +1,9 @@
-import {CtaButton} from "@/components/layout/CtaButton";
-import {Container} from "@/components/layout/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
-import reviewCardData from "@/data/reviewcard-data";
-import ReviewCard from "@/components/ui/ReviewCard";
-import CenterText from "@/components/layout/CenterText";
+import { CtaButton } from "@/components/layout/cta-button";
+import { Container } from "@/components/layout/container";
+import SectionHeading from "@/components/ui/section-heading";
+import reviewCardData from "@/data/review-card-data";
+import ReviewCard from "./review-card";
+import CenterText from "@/components/layout/center-text";
 import { cn } from "@/lib/utils";
 
 export default function Reviews() {

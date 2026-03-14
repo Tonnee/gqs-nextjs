@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
-import DualText from "./DualText";
-import { CtaButton } from "../layout/CtaButton";
+import DualText from "@/components/ui/dual-text";
+import { CtaButton } from "@/components/layout/cta-button";
 import { cn } from "@/lib/utils";
 
 interface BatchCardProps {

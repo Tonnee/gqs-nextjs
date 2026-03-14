@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Container } from "../layout/Container";
-import { CtaButton } from "../layout/CtaButton";
+import { Container } from "./container";
+import { CtaButton } from "./cta-button";
 import { NAV_LINKS } from "@/data/nav-links";
 import { cn } from "@/lib/utils";
 

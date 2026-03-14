@@ -1,13 +1,13 @@
 "use client";
 
-import { Container } from "@/components/layout/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
+import { Container } from "@/components/layout/container";
+import SectionHeading from "@/components/ui/section-heading";
 import dynamic from "next/dynamic";
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import masterPieceData from "@/data/master-piece-data";
-import ClassCard from "@/components/ui/ClassCard";
+import ClassCard from "./class-card";
 
 export default function MasterPieces() {
     const settings = {

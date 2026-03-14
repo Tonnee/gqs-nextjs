@@ -1,6 +1,6 @@
-import { Container } from "@/components/layout/Container";
-import FaqAccordion from "@/components/ui/FaqAccordion";
-import SectionHeading from "@/components/ui/SectionHeading";
+import { Container } from "@/components/layout/container";
+import FaqAccordion from "@/components/ui/faq-accordion";
+import SectionHeading from "@/components/ui/section-heading";
 import homeFaqData from "@/data/home-faq-data";
 
 export default function HomeFaq() {

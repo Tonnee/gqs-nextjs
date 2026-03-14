@@ -1,6 +1,6 @@
-import { Container } from "../../components/layout/Container";
-import SectionHeading from "../../components/ui/SectionHeading";
-import ClassCard from "../../components/ui/ClassCard";
+import { Container } from "@/components/layout/container";
+import SectionHeading from "@/components/ui/section-heading";
+import ClassCard from "./class-card";
 import demoClassData from "@/data/demo-class-data";
 
 export default function DemoClasses() {
