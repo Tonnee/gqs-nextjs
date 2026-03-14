@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 
 interface ContainerProps {
     children: ReactNode;
@@ -13,10 +13,8 @@ export function Container({
     withPadding = true,
 }: ContainerProps) {
     return (
-        <div className={clsx("w-full", withPadding && "px-4")}>
-            <div className={clsx("mx-auto max-w-405", className)}>
-                {children}
-            </div>
+        <div className={cn("w-full mx-auto max-w-405", withPadding && "px-4", className)}>
+            {children}
         </div>
     );
 }
