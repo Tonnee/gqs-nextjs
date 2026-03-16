@@ -3,13 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Container } from "./container";
 import { CtaButton } from "./cta-button";
-import { NAV_LINKS } from "@/data/nav-links";
+import { NAV_LINKS } from "@/data/navigation";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
 
     const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
@@ -41,7 +43,7 @@ export function Navbar() {
                     <div className="hidden lg:flex flex-1 items-center justify-center">
                         <ul className="flex items-center justify-center space-x-8 xl:space-x-16">
                             {NAV_LINKS.map((link) => {
-                                const isActive = link.name === "Course Details"; // Mocking active state based on screenshot
+                                const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
                                 return (
                                     <li key={link.name}>
                                         <Link
@@ -118,7 +120,7 @@ export function Navbar() {
                     <div className={cn("border-t border-gray-100 bg-white", !isMobileMenuOpen && "invisible")}>
                         <ul className="space-y-1 px-4 pb-6 pt-2">
                             {NAV_LINKS.map((link) => {
-                                const isActive = link.name === "Course Details";
+                                const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
                                 return (
                                     <li key={link.name}>
                                         <Link

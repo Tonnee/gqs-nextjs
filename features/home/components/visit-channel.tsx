@@ -3,7 +3,7 @@ import { CtaButton } from "@/components/layout/cta-button";
 
 export default function VisitChannel() {
     return (
-        <section className="mt-[174px]">
+        <section className="mt-20 md:mt-[100px]">
             <Container>
                 <div className="bg-[#0A004B] rounded-[32px] px-6 py-16 md:px-12 md:py-20 lg:px-[178px] lg:pt-[87px] lg:pb-[55px] text-center">
                     <h2 className="text-2xl md:text-3xl font-semibold text-white leading-snug">

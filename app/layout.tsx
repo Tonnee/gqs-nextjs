@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Navbar } from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import GoToTop from "@/components/ui/go-to-top";
 import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
@@ -38,6 +39,7 @@ export default function RootLayout({
                 <Navbar />
                 {children}
                 <Footer />
+                <GoToTop />
             </body>
         </html>
     );

@@ -2,6 +2,8 @@ import Image, { StaticImageData } from "next/image";
 import DualText from "@/components/ui/dual-text";
 import { CtaButton } from "@/components/layout/cta-button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+
 interface ClassCardProps {
     imgSrc: string | StaticImageData;
     imgAlt: string;
@@ -25,7 +27,7 @@ export default function ClassCard({
 }: ClassCardProps) {
     return (
         <article className={cn(
-            "bg-white p-9 rounded-3xl flex flex-col h-full",
+            "bg-white p-6 md:p-9 rounded-3xl flex flex-col h-full",
             className
         )}>
             <div className="relative w-full h-[248px] rounded-xl overflow-hidden shrink-0">
@@ -33,7 +35,7 @@ export default function ClassCard({
                     src={imgSrc}
                     alt={imgAlt}
                     fill
-                    className="object-cover"
+                    className="object-cover hover:scale-105 transition-all duration-300 ease-in-out"
                     sizes="(max-width: 768px) 100vw, 33vw"
                 />
             </div>
@@ -42,9 +44,9 @@ export default function ClassCard({
                 Title
             </p>
 
-            <h5 className="font-raleway text-2xl font-extrabold text-[#152129] tracking-wider mt-[14px]">
+            <Link href={classLink} className="font-raleway text-2xl font-extrabold text-[#152129] tracking-wider mt-[14px] hover:text-accent transition-all duration-300 ease-in-out">
                 {classTitle}
-            </h5>
+            </Link>
 
             <div className="mt-[8px] mb-[9px] flex-1">
                 <DualText

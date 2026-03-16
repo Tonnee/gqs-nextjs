@@ -2,6 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import DualText from "@/components/ui/dual-text";
 import { CtaButton } from "@/components/layout/cta-button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface BatchCardProps {
     imgSrc: string | StaticImageData;
@@ -27,13 +28,13 @@ export default function BatchCard({
     className,
 }: BatchCardProps) {
     return (
-        <article className={cn("bg-white p-9 rounded-3xl flex flex-col h-full", className)}>
+        <article className={cn("bg-white md:p-9 p-6 rounded-3xl flex flex-col h-full", className)}>
                 <div className="relative w-full h-[290px] rounded-xl overflow-hidden shrink-0">
                     <Image
                         src={imgSrc}
                         alt={imgAlt || "Batch course image"}
                         fill
-                        className="object-cover"
+                        className="object-cover hover:scale-105 transition-all duration-300 ease-in-out"
                         sizes="(max-width: 768px) 100vw, 33vw"
                     />
                 </div>
@@ -41,9 +42,9 @@ export default function BatchCard({
                 <p className="font-base tracking-widest text-accent mt-[34px]">
                     {courseLevel}
                 </p>
-                <h4 className="font-raleway text-2xl font-extrabold text-ash tracking-wider mt-[14px]">
+                <Link href={courseLink} className="font-raleway text-2xl font-extrabold text-ash tracking-wider mt-[14px] hover:text-accent transition-all duration-300 ease-in-out">
                     {courseName}
-                </h4>
+                </Link>
 
                 <div className="mt-[28px] mb-[14px] flex-1">
                     <DualText

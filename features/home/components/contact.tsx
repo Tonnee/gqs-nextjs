@@ -21,7 +21,7 @@ export default function Contact() {
                     className="mt-8 mb-10"
                 />
 
-                <div className="flex mt-[78px] justify-between">
+                <div className="flex flex-wrap xl:flex-nowrap mt-[78px] xl:justify-between justify-center gap-10 xl:gap-0">
                     <IconText
                         icon={<MdCall />}
                         text="+88 01833455635"

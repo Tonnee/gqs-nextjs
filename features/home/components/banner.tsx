@@ -16,7 +16,7 @@ export default function Banner() {
 
     return (
         <section className="bg-[#0A033C] w-full min-h-[910px] relative">
-            <div className="flex flex-col-reverse xl:flex-row items-center w-full h-full min-h-[910px]">
+            <div className="flex flex-col xl:flex-row items-center w-full h-full min-h-[910px]">
 
                 {/* Image + play button */}
                 <div className="w-full xl:w-1/2 h-[500px] xl:h-[910px] relative">
