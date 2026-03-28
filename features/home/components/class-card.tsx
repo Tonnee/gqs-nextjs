@@ -30,7 +30,7 @@ export default function ClassCard({
             "bg-white p-6 md:p-9 rounded-3xl flex flex-col h-full",
             className
         )}>
-            <div className="relative w-full h-[248px] rounded-xl overflow-hidden shrink-0">
+            <div className="relative w-full h-62 rounded-xl overflow-hidden shrink-0">
                 <Image
                     src={imgSrc}
                     alt={imgAlt}
@@ -40,15 +40,15 @@ export default function ClassCard({
                 />
             </div>
 
-            <p className="font-base tracking-widest text-accent mt-[34px]">
+            <p className="font-base tracking-widest text-accent mt-8.5">
                 Title
             </p>
 
-            <Link href={classLink} className="font-raleway text-2xl font-extrabold text-[#152129] tracking-wider mt-[14px] hover:text-accent transition-all duration-300 ease-in-out">
+            <Link href={classLink} className="font-raleway text-2xl font-extrabold text-foreground-heading tracking-wider mt-3.5 hover:text-accent transition-all duration-300 ease-in-out">
                 {classTitle}
             </Link>
 
-            <div className="mt-[8px] mb-[9px] flex-1">
+            <div className="mt-2 mb-2.5 flex-1">
                 <DualText
                     lightText="Class Duration: "
                     boldText={duration}

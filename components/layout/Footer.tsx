@@ -1,15 +1,15 @@
 import { Container } from "./container";
 import SocialIcon from "../ui/social-icon";
 import { FaFacebookF, FaWhatsapp, FaYoutube } from "react-icons/fa";
-import { FOOTER_LINKS, LEGAL_LINKS, type FooterLinkSection, type FooterLinkItemType } from "@/data/navigation";
+import { FOOTER_LINKS, LEGAL_LINKS, type FooterLinkSection, type FooterLinkItemType } from "@/features/home/data/navigation";
 import Link from "next/link";
 import FooterLinkItem from "../ui/footer-link-item";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#050027] pt-[158px] pb-[100px]">
+        <footer className="bg-primary-deep pt-40 pb-25">
             <Container>
-                <div className="flex flex-col lg:flex-row justify-between border-b border-white/10 pb-[100px] gap-12 lg:gap-0">
+                <div className="flex flex-col lg:flex-row justify-between border-b border-white/10 pb-25 gap-12 lg:gap-0">
                     <div className="w-full lg:w-4/12">
                         <h6 className="text-white font-raleway text-4xl font-bold tracking-wider">
                             GRE Quant School
@@ -20,7 +20,7 @@ export default function Footer() {
                             dedicated to success.
                         </p>
 
-                        <div className="flex mt-11 gap-[26px]">
+                        <div className="flex mt-11 gap-6.5">
                             <SocialIcon
                                 link="#"
                                 icon={<FaFacebookF />}
@@ -42,7 +42,7 @@ export default function Footer() {
                         <div className="flex flex-col sm:flex-row justify-between gap-10 sm:gap-4">
                             {FOOTER_LINKS.map((section: FooterLinkSection, index: number) => (
                                 <ul key={index}>
-                                    <p className="font-raleway text-[22px] font-bold tracking-wider text-white/85 mb-10">
+                                    <p className="font-raleway text-xl font-bold tracking-wider text-white/85 mb-10">
                                         {section.title}
                                     </p>
                                     {section.links.map((item: FooterLinkItemType, i: number) => (

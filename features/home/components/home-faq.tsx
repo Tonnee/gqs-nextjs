@@ -1,17 +1,17 @@
 import { Container } from "@/components/layout/container";
 import FaqAccordion from "@/components/ui/faq-accordion";
 import SectionHeading from "@/components/ui/section-heading";
-import homeFaqData from "@/data/home-faq-data";
+import homeFaqData from "@/features/home/data/home-faq-data";
 
 export default function HomeFaq() {
     const firstHalf = homeFaqData.slice(0, 3);
     const secondHalf = homeFaqData.slice(3, 6);
 
     return (
-        <section className="pt-36 pb-10 bg-[#050027]">
+        <section className="pt-36 pb-10 bg-primary-deep">
             <Container>
                 {/* Header row */}
-                <div className="flex flex-col lg:flex-row gap-16 xl:gap-[150px]">
+                <div className="flex flex-col lg:flex-row gap-16 xl:gap-36">
                     <div className="lg:w-1/2">
                         <SectionHeading
                             topText="FAQ"
@@ -23,7 +23,7 @@ export default function HomeFaq() {
                     </div>
 
                     <div className="lg:w-1/2">
-                        <p className="text-xl md:text-2xl text-white/85 leading-relaxed lg:leading-[42px] mt-0 lg:mt-10">
+                        <p className="text-xl md:text-2xl text-white/85 leading-relaxed lg:leading-loose mt-0 lg:mt-10">
                             Find quick solutions to common queries about our
                             courses, GRE prep, and more. If you don&apos;t see
                             your question here, feel free to reach out!
@@ -32,7 +32,7 @@ export default function HomeFaq() {
                 </div>
 
                 {/* Accordion columns */}
-                <div className="flex flex-col lg:flex-row gap-10 xl:gap-[150px] mt-16 xl:mt-28">
+                <div className="flex flex-col lg:flex-row gap-10 xl:gap-36 mt-16 xl:mt-28">
                     <div className="lg:w-1/2">
                         <FaqAccordion
                             items={firstHalf}

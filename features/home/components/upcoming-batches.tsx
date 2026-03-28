@@ -1,11 +1,11 @@
 import BatchCard from "./batch-card";
 import { Container } from "@/components/layout/container";
 import SectionHeading from "@/components/ui/section-heading";
-import { batchData } from "@/data/batch-data";
+import { batchData } from "@/features/home/data/batch-data";
 
 export default function UpcomingBatches() {
     return (
-        <section className="pt-[136px] pb-[140px] bg-[#F5FBFF]">
+        <section className="pt-32 pb-36 bg-background-subtle">
             <Container>
                 <SectionHeading
                     level={2}
@@ -14,7 +14,7 @@ export default function UpcomingBatches() {
                     className="text-center text-primary tracking-wider"
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 mt-[70px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 mt-16">
                     {batchData.map((batch) => (
                         <BatchCard
                             key={batch.slug}

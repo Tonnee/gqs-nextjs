@@ -1,6 +1,6 @@
 import { Container } from "@/components/layout/container";
 import SectionHeading from "@/components/ui/section-heading";
-import CenterText from "@/components/layout/center-text";
+import CenterText from "@/components/ui/center-text";
 import IconText from "@/components/ui/icon-text";
 import { MdCall } from "react-icons/md";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { RiMailSendFill } from "react-icons/ri";
 
 export default function Contact() {
     return (
-        <section className="mt-[200px] mb-[178px]">
+        <section className="mt-48 mb-44">
             <Container>
                 <SectionHeading
                     level={6}
@@ -21,7 +21,7 @@ export default function Contact() {
                     className="mt-8 mb-10"
                 />
 
-                <div className="flex flex-wrap xl:flex-nowrap mt-[78px] xl:justify-between justify-center gap-10 xl:gap-0">
+                <div className="flex flex-wrap xl:flex-nowrap mt-20 xl:justify-between justify-center gap-10 xl:gap-0">
                     <IconText
                         icon={<MdCall />}
                         text="+88 01833455635"

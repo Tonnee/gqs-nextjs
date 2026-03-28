@@ -13,7 +13,7 @@ export default function ReviewCard({ imgSrc, imgAlt, score, name, className }: R
     return (
         <article 
             className={cn(
-                "relative w-full h-[400px] md:h-[577px] md:rounded-full rounded-2xl overflow-hidden shrink-0 group", 
+                "relative w-full h-100 md:h-144 md:rounded-full rounded-2xl overflow-hidden shrink-0 group", 
                 className
             )}
         >

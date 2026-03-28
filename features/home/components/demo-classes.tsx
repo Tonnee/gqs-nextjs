@@ -1,11 +1,11 @@
 import { Container } from "@/components/layout/container";
 import SectionHeading from "@/components/ui/section-heading";
 import ClassCard from "./class-card";
-import demoClassData from "@/data/demo-class-data";
+import demoClassData from "@/features/home/data/demo-class-data";
 
 export default function DemoClasses() {
     return (
-            <section className="pt-[136px] pb-[150px] bg-[#F5FBFF]">
+            <section className="pt-32 pb-36 bg-background-subtle">
                 <Container>
                     <SectionHeading
                         level={4}
@@ -13,7 +13,7 @@ export default function DemoClasses() {
                         topText="Resources"
                     />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 mt-[55px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 mt-14">
                         {demoClassData.map((item, index) => (
                             <ClassCard
                                 key={index}

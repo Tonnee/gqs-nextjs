@@ -1,0 +1,79 @@
+import Image from "next/image";
+import CourseBannerImg from "@/public/images/course-banner.png";
+import { CtaButton } from "@/components/layout/cta-button";
+import Heading from "@/components/ui/heading";
+import DualText from "@/components/ui/dual-text";
+
+// ---------------------------------------------------------------------------
+// Banner — main section component
+// ---------------------------------------------------------------------------
+
+export default function CourseHero() {
+    return (
+        <section className="bg-primary w-full min-h-203.5 relative">
+            <div className="flex flex-col xl:flex-row items-center w-full h-full min-h-203.5">
+
+                {/* Image + play button */}
+                <div className="w-full xl:w-1/2 h-125 xl:h-203.5 relative">
+                    <Image
+                        src={CourseBannerImg}
+                        alt="GRE Quant School Banner image"
+                        fill
+                        priority
+                        className="object-cover object-center"
+                        sizes="(max-width: 1280px) 100vw, 50vw"
+                    />
+                </div>
+
+                {/* Copy */}
+                <div className="w-full xl:w-1/2 flex flex-col justify-center px-6 md:px-12 xl:pl-28 xl:pr-8 py-16 xl:py-0">
+                    <div className="max-w-3xl">
+                        <p className="font-poppins text-accent text-base font-medium tracking-widest uppercase">
+                            Basic to Advanced
+                        </p>
+                        <Heading level={1} className="text-4xl md:text-5xl lg:text-6xl font-raleway font-bold tracking-widest leading-tight text-white/90 mb-12" >
+                            Beat GRE Quant in 2 Months
+                        </Heading>
+                        <div>
+                            <p className="font-poppins text-white text-xl font-medium tracking-widest uppercase mb-5">Upcoming Batch</p>
+
+                            <DualText
+                                lightText="Starting From:"
+                                boldText="12th October 2026"
+                                lightColor="text-background-subtle/60"
+                                boldColor="text-background-subtle"
+                            />
+                            <DualText
+                                lightText="Days:"
+                                boldText="Sun, Tues, Thursday"
+                                lightColor="text-background-subtle/60"
+                                boldColor="text-background-subtle"
+                            />
+                            <DualText
+                                lightText="Time:"
+                                boldText="8:00PM - 10:00PM"
+                                lightColor="text-background-subtle/60"
+                                boldColor="text-background-subtle"
+                            />
+                        </div>
+                        <div className="mt-10 md:mt-20 text-white uppercase flex flex-col sm:flex-row items-start sm:items-center w-max rounded-full sm:pr-2 sm:py-2">
+                            <CtaButton
+                                href="/"
+                                className="w-max sm:w-auto py-3 px-6 mr-6 font-poppins text-base font-medium capitalize whitespace-nowrap"
+                                baseColorClass="bg-white"
+                                textColorClass="text-primary hover:text-white"
+                                hoverColorClass="bg-accent"
+                            >
+                                Join Today
+                            </CtaButton>
+
+                            <span className="text-sm md:text-base text-left mb-4 sm:mb-0">
+                                Get <span className="text-accent font-semibold mx-1">50% discount</span> on course fee
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}

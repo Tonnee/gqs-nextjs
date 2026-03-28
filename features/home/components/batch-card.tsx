@@ -29,7 +29,7 @@ export default function BatchCard({
 }: BatchCardProps) {
     return (
         <article className={cn("bg-white md:p-9 p-6 rounded-3xl flex flex-col h-full", className)}>
-                <div className="relative w-full h-[290px] rounded-xl overflow-hidden shrink-0">
+                <div className="relative w-full h-72 rounded-xl overflow-hidden shrink-0">
                     <Image
                         src={imgSrc}
                         alt={imgAlt || "Batch course image"}
@@ -39,14 +39,14 @@ export default function BatchCard({
                     />
                 </div>
 
-                <p className="font-base tracking-widest text-accent mt-[34px]">
+                <p className="font-base tracking-widest text-accent mt-8.5">
                     {courseLevel}
                 </p>
-                <Link href={courseLink} className="font-raleway text-2xl font-extrabold text-ash tracking-wider mt-[14px] hover:text-accent transition-all duration-300 ease-in-out">
+                <Link href={courseLink} className="font-raleway text-2xl font-extrabold text-ash tracking-wider mt-3.5 hover:text-accent transition-all duration-300 ease-in-out">
                     {courseName}
                 </Link>
 
-                <div className="mt-[28px] mb-[14px] flex-1">
+                <div className="mt-7 mb-3.5 flex-1">
                     <DualText
                         lightText="Starting From: "
                         boldText={startDate}

@@ -9,11 +9,23 @@
   --font-poppins: var(--font-poppins);
   --font-raleway: var(--font-raleway);
 
-  /* colors */
-  --color-primary: #0A033C;
-  --color-secondary: #323B53;
-  --color-accent: #F58655;
-  --color-dark: #152129
+  /* --- Primary (Brand Identity) --- */
+  --color-primary: #0A033C;         /* Main section backgrounds */
+  --color-primary-deep: #050027;    /* High-contrast deep blue (FAQ) */
+  --color-primary-soft: #0A004B;    /* Supporting dark containers */
+  --color-secondary: #323B53;       /* Neutral blue supporting color */
+
+  /* --- Accent (Actions & Highlights) --- */
+  --color-accent: #F58655;          /* Main Action Orange */
+  --color-accent-dark: #101C3D;     /* Dark accent base (Play buttons) */
+
+  /* --- Background (Surface & Structure) --- */
+  --color-background-subtle: #F5FBFF; /* Light blue/off-white (Upcoming Batches) */
+  --color-background-cta: #0D0D3F;    /* Deep CTA card foundations */
+
+  /* --- Foreground (Text & Content) --- */
+  --color-foreground-heading: #152129; /* Near-black for titles and headings */
+  --color-foreground-muted: #656565;   /* Gray for descriptions and subtext */
 }
 
 body {

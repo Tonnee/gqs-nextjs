@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Container } from "@/components/layout/container";
 import SectionHeading from "@/components/ui/section-heading";
-import masterPieceData from "@/data/master-piece-data";
+import masterPieceData from "@/features/home/data/master-piece-data";
 import ClassCard from "./class-card";
 import { cn } from "@/lib/utils";
 
@@ -53,8 +53,8 @@ function DotNavigation({
                     className={cn(
                         "rounded-full transition-all duration-300",
                         index === selectedIndex
-                            ? "w-[15px] h-[15px] bg-white"
-                            : "w-[11px] h-[11px] bg-white/50 hover:bg-white/70"
+                            ? "w-4 h-4 bg-white"
+                            : "w-3 h-3 bg-white/50 hover:bg-white/70"
                     )}
                 />
             ))}
@@ -113,7 +113,7 @@ export default function MasterPieces() {
               : "flex-[0_0_85%]";
 
     return (
-        <section className="py-20 md:py-[120px] bg-secondary overflow-hidden">
+        <section className="py-20 md:py-28 bg-secondary overflow-hidden">
             <Container>
                 <SectionHeading
                     level={2}
@@ -122,7 +122,7 @@ export default function MasterPieces() {
                     className="text-white"
                 />
 
-                <div className="mt-12 md:mt-[55px] mb-16 md:mb-[80px] w-full">
+                <div className="mt-12 md:mt-14 mb-16 md:mb-20 w-full">
                     <div className="overflow-hidden" ref={emblaRef}>
                         <div className="flex -ml-2 md:-ml-4">
                             {masterPieceData.map((item, index) => (
@@ -139,7 +139,7 @@ export default function MasterPieces() {
                                         classTitle={item.title}
                                         classLink={item.link}
                                         duration={item.time}
-                                        ctaBaseColorClass="bg-[#0D0D3F]"
+                                        ctaBaseColorClass="bg-background-cta"
                                         className="h-full"
                                     />
                                 </div>

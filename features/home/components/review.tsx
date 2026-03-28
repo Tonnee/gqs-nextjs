@@ -1,14 +1,14 @@
 import { CtaButton } from "@/components/layout/cta-button";
 import { Container } from "@/components/layout/container";
 import SectionHeading from "@/components/ui/section-heading";
-import reviewCardData from "@/data/review-card-data";
+import reviewCardData from "@/features/home/data/review-card-data";
 import ReviewCard from "./review-card";
-import CenterText from "@/components/layout/center-text";
+import CenterText from "@/components/ui/center-text";
 import { cn } from "@/lib/utils";
 
 export default function Reviews() {
     return (
-        <section className="py-16 md:py-[120px] mb-8">
+        <section className="py-16 md:py-28 mb-8">
             <Container>
                 <div className="flex flex-col items-center">
                     <SectionHeading
@@ -42,7 +42,7 @@ export default function Reviews() {
                                 score={cardItem.score}
                                 name={cardItem.name}
                                 className={cn(
-                                    (index === 1 || index === 2) && "lg:mt-[105px]"
+                                    (index === 1 || index === 2) && "lg:mt-26"
                                 )}
                             />
                         ))}

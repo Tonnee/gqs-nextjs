@@ -15,7 +15,7 @@ export default function DynamicHeading({
 }: HeadingProps) {
     const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
     return (
-        <Tag className={cn("font-raleway text-[42px] font-bold", className)}>
+        <Tag className={cn("font-raleway text-4xl font-bold", className)}>
             {children}
         </Tag>
     );

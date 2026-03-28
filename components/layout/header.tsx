@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "./container";
-import { Announcement, defaultLeft, defaultRight } from "@/data/announcements";
+import { Announcement, defaultLeft, defaultRight } from "@/features/home/data/announcements";
 import { cn } from "@/lib/utils";
 
 export interface HeaderProps {

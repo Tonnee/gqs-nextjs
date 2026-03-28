@@ -9,7 +9,7 @@ export interface SocialIconProps {
 
 export default function SocialIcon({ icon, link, ariaLabel }: SocialIconProps) {
     return (
-        <div className="w-[55px] h-[55px] bg-white/10 rounded-full flex justify-center items-center">
+        <div className="w-14 h-14 bg-white/10 rounded-full flex justify-center items-center">
             <Link href={link} aria-label={ariaLabel} className="text-2xl text-white hover:text-accent ease-linear duration-200">{icon}</Link>
         </div>
     );

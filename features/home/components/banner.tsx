@@ -15,11 +15,11 @@ export default function Banner() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <section className="bg-[#0A033C] w-full min-h-[910px] relative">
-            <div className="flex flex-col xl:flex-row items-center w-full h-full min-h-[910px]">
+        <section className="bg-primary w-full min-h-227.5 relative">
+            <div className="flex flex-col xl:flex-row items-center w-full h-full min-h-227.5">
 
                 {/* Image + play button */}
-                <div className="w-full xl:w-1/2 h-[500px] xl:h-[910px] relative">
+                <div className="w-full xl:w-1/2 h-125 xl:h-227.5 relative">
                     <Image
                         src={BannerImg}
                         alt="GRE Quant School Banner image"
@@ -34,8 +34,8 @@ export default function Banner() {
                         aria-label="Play trailer"
                         onClick={() => setIsModalOpen(true)}
                     >
-                        <span className="relative w-[84px] h-[84px] bg-[#101C3D] rounded-full flex justify-center items-center">
-                            <span className="absolute w-[124px] h-[124px] bg-white/15 rounded-full flex justify-center items-center -z-10" />
+                        <span className="relative w-21 h-21 bg-accent-dark rounded-full flex justify-center items-center">
+                            <span className="absolute w-31 h-31 bg-white/15 rounded-full flex justify-center items-center -z-10" />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
@@ -50,28 +50,28 @@ export default function Banner() {
                                 />
                             </svg>
 
-                            <span className="absolute w-[124px] h-[124px] animate-ping bg-white/15 rounded-full flex justify-center items-center -z-10" />
+                            <span className="absolute w-31 h-31 animate-ping bg-white/15 rounded-full flex justify-center items-center -z-10" />
                         </span>
                     </button>
                 </div>
 
                 {/* Copy */}
-                <div className="w-full xl:w-1/2 flex flex-col justify-center px-6 md:px-12 xl:pl-[120px] xl:pr-8 py-16 xl:py-0">
-                    <div className="max-w-[748px]">
-                        <p className="font-poppins text-[#F58655] text-base font-medium tracking-widest uppercase">
+                <div className="w-full xl:w-1/2 flex flex-col justify-center px-6 md:px-12 xl:pl-28 xl:pr-8 py-16 xl:py-0">
+                    <div className="max-w-3xl">
+                        <p className="font-poppins text-accent text-base font-medium tracking-widest uppercase">
                             GRE Quant School
                         </p>
-                        <Heading level={1} className="text-4xl md:text-5xl lg:text-[58px] font-raleway font-bold tracking-[1.2px] leading-tight lg:leading-[84px] text-white/90" >
+                        <Heading level={1} className="text-4xl md:text-5xl lg:text-6xl font-raleway font-bold tracking-widest leading-tight text-white/90" >
                             Master GRE Quant with Precision and Confidence
                         </Heading>
-                        <p className="text-lg max-w-[597px] mt-6 md:mt-[42px] text-white/75 leading-[30px]">
+                        <p className="text-lg max-w-xl mt-6 md:mt-10.5 text-white/75 leading-relaxed">
                             Learn smarter strategies, solve faster, and score higher
                             with ease. Join thousands who have aced GRE Quant with our
                             help!
                         </p>
-                        <div className="mt-10 md:mt-[78px] text-white uppercase flex flex-col sm:flex-row items-start sm:items-center sm:bg-white/10 w-max rounded-full sm:pr-[7px] sm:py-[7px] sm:pl-8">
+                        <div className="mt-10 md:mt-20 text-white uppercase flex flex-col sm:flex-row items-start sm:items-center sm:bg-white/10 w-max rounded-full sm:pr-2 sm:py-2 sm:pl-8">
                             <span className="text-sm md:text-base text-left mb-4 sm:mb-0">
-                                Get <span className="text-[#F58655] font-semibold mx-1">50% discount</span> on course fee
+                                Get <span className="text-accent font-semibold mx-1">50% discount</span> on course fee
                             </span>
                             <CtaButton
                                 href="/"

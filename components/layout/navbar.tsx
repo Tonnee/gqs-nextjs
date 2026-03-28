@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Container } from "./container";
 import { CtaButton } from "./cta-button";
-import { NAV_LINKS } from "@/data/navigation";
+import { NAV_LINKS } from "@/features/home/data/navigation";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -87,7 +87,7 @@ export function Navbar() {
                                 <span
                                     className={cn(
                                         "block h-0.5 w-5 rounded-full bg-current transition-all duration-300 ease-in-out",
-                                        isMobileMenuOpen ? "translate-y-[8px] rotate-45" : "translate-y-0 rotate-0"
+                                        isMobileMenuOpen ? "translate-y-2 rotate-45" : "translate-y-0 rotate-0"
                                     )}
                                 />
                                 <span
@@ -99,7 +99,7 @@ export function Navbar() {
                                 <span
                                     className={cn(
                                         "mt-1.5 block h-0.5 w-5 rounded-full bg-current transition-all duration-300 ease-in-out",
-                                        isMobileMenuOpen ? "-translate-y-[8px] -rotate-45" : "translate-y-0 rotate-0"
+                                        isMobileMenuOpen ? "-translate-y-2 -rotate-45" : "translate-y-0 rotate-0"
                                     )}
                                 />
                             </div>
