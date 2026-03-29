@@ -1,6 +1,6 @@
 import Banner from "@/features/home/components/banner";
 import Reviews from "@/features/home/components/review";
-import UpcomingBatches from "@/features/home/components/upcoming-batches";
+import UpcomingCourses from "@/features/home/components/upcoming-courses";
 import DemoClasses from "@/features/home/components/demo-classes";
 import MasterPieces from "@/features/home/components/master-pieces";
 import VisitChannel from "@/features/home/components/visit-channel";
@@ -10,7 +10,7 @@ import HomeFaq from "@/features/home/components/home-faq";
 export default function Home() {
     return <>
         <Banner />
-        <UpcomingBatches />
+        <UpcomingCourses />
         <Reviews />
         <DemoClasses />
         <MasterPieces />

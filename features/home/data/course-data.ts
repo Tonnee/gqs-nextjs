@@ -1,4 +1,4 @@
-export interface BatchInfo {
+export interface CourseInfo {
     slug: string;
     imgSrc: string;
     imgAlt: string;
@@ -8,9 +8,14 @@ export interface BatchInfo {
     days: string;
     time: string;
     courseLink: string;
+    materials?: string;
+    solvingQues?: string;
+    classDuration?: string;
+    classFrequency?: string;
+    totalClasses?: string;
 }
 
-export const batchData: BatchInfo[] = [
+export const courseData: CourseInfo[] = [
     {
         slug: "beat-gre-quant",
         imgSrc: "/images/upcoming-batches/1.png",
@@ -20,7 +25,12 @@ export const batchData: BatchInfo[] = [
         startDate: "April 15, 2025",
         days: "Monday - Friday",
         time: "6:00 PM - 8:00 PM",
-        courseLink: "#",
+        courseLink: "/courses/beat-gre-quant",
+        materials: "bl-bgq",
+        solvingQues: "2000+",
+        classDuration: "2",
+        classFrequency: "3",
+        totalClasses: "24",
     },
     {
         slug: "beat-kmf",
@@ -31,7 +41,11 @@ export const batchData: BatchInfo[] = [
         startDate: "June 30, 2025",
         days: "Monday - Friday",
         time: "6:00 PM - 8:00 PM",
-        courseLink: "#",
+        courseLink: "/courses/beat-kmf",
+        solvingQues: "1147+",
+        classDuration: "1.5",
+        classFrequency: "2",
+        totalClasses: "36",
     },
     {
         slug: "mock-test",
@@ -42,6 +56,10 @@ export const batchData: BatchInfo[] = [
         startDate: "April 15, 2025",
         days: "Monday - Friday",
         time: "6:00 PM - 8:00 PM",
-        courseLink: "#",
+        courseLink: "/courses/mock-test",
+        solvingQues: "1000+",
+        classDuration: "2.5",
+        classFrequency: "2",
+        totalClasses: "24",
     },
 ];

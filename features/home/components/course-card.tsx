@@ -4,7 +4,7 @@ import { CtaButton } from "@/components/layout/cta-button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-interface BatchCardProps {
+interface CourseCardProps {
     imgSrc: string | StaticImageData;
     imgAlt: string;
     courseName: string;
@@ -16,7 +16,7 @@ interface BatchCardProps {
     className?: string;
 }
 
-export default function BatchCard({
+export default function CourseCard({
     imgSrc,
     imgAlt,
     courseName,
@@ -26,7 +26,7 @@ export default function BatchCard({
     time,
     courseLink,
     className,
-}: BatchCardProps) {
+}: CourseCardProps) {
     return (
         <article className={cn("bg-white md:p-9 p-6 rounded-3xl flex flex-col h-full", className)}>
                 <div className="relative w-full h-72 rounded-xl overflow-hidden shrink-0">

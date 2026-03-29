@@ -7,7 +7,10 @@ import { usePathname } from "next/navigation";
 import { Container } from "./container";
 import { CtaButton } from "./cta-button";
 import { NAV_LINKS } from "@/features/home/data/navigation";
+import { courseData } from "@/features/home/data/course-data";
 import { cn } from "@/lib/utils";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import DualText from "@/components/ui/dual-text";
 
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -44,8 +47,56 @@ export function Navbar() {
                         <ul className="flex items-center justify-center space-x-8 xl:space-x-16">
                             {NAV_LINKS.map((link) => {
                                 const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
+                                
+                                if (link.name === "Courses") {
+                                    return (
+                                        <li key={link.name} className="group flex items-center h-20">
+                                            <Link
+                                                href={link.href}
+                                                className={cn(
+                                                    "flex items-center gap-1 text-sm font-normal transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                                                    isActive ? "text-accent" : "text-dark"
+                                                )}
+                                                aria-current={isActive ? "page" : undefined}
+                                            >
+                                                {link.name}
+                                                <MdKeyboardArrowDown className="text-lg transition-transform duration-300 group-hover:rotate-180" />
+                                            </Link>
+
+                                            <div className="absolute top-[80px] left-0 w-full bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out cursor-default border-t border-gray-100">
+                                                <Container>
+                                                    <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-20 py-14">
+                                                        {courseData.map((course) => (
+                                                            <div key={course.slug} className="flex flex-col space-y-2 group/course">
+                                                                <p className="text-accent text-sm font-semibold uppercase tracking-wider mb-4">{course.courseLevel}</p>
+                                                                <Link href={course.courseLink} className="text-foreground-heading text-3xl leading-tight font-semibold group-hover/course:text-accent transition-colors">
+                                                                    {course.courseName}
+                                                                </Link>
+                                                                <div className="flex flex-col mt-10">
+                                                                    <DualText lightText="Starts:" boldText={course.startDate} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
+                                                                    <DualText lightText="Days:" boldText={course.days} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
+                                                                    <DualText lightText="Time:" boldText={course.time} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-0" fontClass="text-sm" />
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                        {/* 4th Column Image displays only for xl screens */}
+                                                        <div className="hidden xl:block relative w-full h-[350px] rounded-lg overflow-hidden shadow-sm">
+                                                            <Image
+                                                                src="/images/course-banner.png"
+                                                                alt="Latest Courses"
+                                                                fill
+                                                                className="object-cover transition-transform hover:scale-105 duration-500"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </Container>
+                                            </div>
+                                        </li>
+                                    );
+                                }
+
                                 return (
-                                    <li key={link.name}>
+                                    <li key={link.name} className="flex items-center h-20">
                                         <Link
                                             href={link.href}
                                             className={cn(
@@ -121,6 +172,41 @@ export function Navbar() {
                         <ul className="space-y-1 px-4 pb-6 pt-2">
                             {NAV_LINKS.map((link) => {
                                 const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
+                                
+                                if (link.name === "Courses") {
+                                    return (
+                                        <li key={link.name}>
+                                            <div className="flex flex-col">
+                                                <Link
+                                                    href={link.href}
+                                                    className={cn(
+                                                        "flex items-center justify-between rounded-md px-3 py-3 text-base font-medium transition-colors",
+                                                        isActive ? "bg-accent/10 text-accent" : "text-secondary hover:bg-gray-50 hover:text-primary"
+                                                    )}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    aria-current={isActive ? "page" : undefined}
+                                                >
+                                                    {link.name}
+                                                    <MdKeyboardArrowDown className="text-xl" />
+                                                </Link>
+                                                <div className="pl-6 pr-3 py-2 flex flex-col space-y-3 mb-2 mt-1">
+                                                    {courseData.map((course) => (
+                                                        <Link 
+                                                            key={course.slug} 
+                                                            href={course.courseLink} 
+                                                            className="flex flex-col space-y-1 bg-gray-50/50 p-2 rounded-md hover:bg-gray-100 transition-colors"
+                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                        >
+                                                            <span className="text-sm font-semibold text-primary">{course.courseName}</span>
+                                                            <span className="text-xs text-foreground-muted">{course.startDate} • {course.time}</span>
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    );
+                                }
+
                                 return (
                                     <li key={link.name}>
                                         <Link
@@ -139,11 +225,11 @@ export function Navbar() {
                             })}
                             <li className="pt-4">
                                 <CtaButton
-                                    href="/upcoming-batch"
+                                    href="/courses"
                                     className="block w-full px-4 py-3 text-center text-base"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    Upcoming Batch
+                                    Upcoming Courses
                                 </CtaButton>
                             </li>
                         </ul>
