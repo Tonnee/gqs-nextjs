@@ -1,3 +1,7 @@
+import { CourseOutlineItem, beatGreQuantOutlineData } from "./outlines/beat-gre-quant-outline";
+import { beatKmfOutlineData } from "./outlines/beat-kmf-outline";
+import { mockTestOutlineData } from "./outlines/mock-test-outline";
+
 export interface CourseInfo {
     slug: string;
     imgSrc: string;
@@ -13,6 +17,9 @@ export interface CourseInfo {
     classDuration?: string;
     classFrequency?: string;
     totalClasses?: string;
+    courseOutline?: CourseOutlineItem[];
+    fees?: string;
+    courseDuration?: string;
 }
 
 export const courseData: CourseInfo[] = [
@@ -31,6 +38,9 @@ export const courseData: CourseInfo[] = [
         classDuration: "2",
         classFrequency: "3",
         totalClasses: "24",
+        courseOutline: beatGreQuantOutlineData,
+        fees: "3000 BDT",
+        courseDuration: "2 Months"
     },
     {
         slug: "beat-kmf",
@@ -46,6 +56,9 @@ export const courseData: CourseInfo[] = [
         classDuration: "1.5",
         classFrequency: "2",
         totalClasses: "36",
+        courseOutline: beatKmfOutlineData,
+        fees: "5000 BDT",
+        courseDuration: "3 Months"
     },
     {
         slug: "mock-test",
@@ -61,5 +74,8 @@ export const courseData: CourseInfo[] = [
         classDuration: "2.5",
         classFrequency: "2",
         totalClasses: "24",
+        courseOutline: mockTestOutlineData,
+        fees: "4000 BDT",
+        courseDuration: "1 Month"
     },
 ];

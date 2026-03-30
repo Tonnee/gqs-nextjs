@@ -1,6 +1,6 @@
 import SectionHeading from "@/components/ui/section-heading";
 import CourseDetailsItem from "./course-details-item";
-
+import { Container } from "@/components/layout/container";
 import { CourseInfo } from "@/features/home/data/course-data";
 import { getCourseDetailsIcons } from "@/features/courses/constants";
 
@@ -17,7 +17,7 @@ export default function CourseDetails({ course }: CourseDetailsProps) {
 
     return (
         <section className="bg-background-subtle py-16 md:py-36">
-            <div className="container mx-auto px-4">
+            <Container>
                 <SectionHeading
                     level={2}
                     topText="COURSE DETAILS"
@@ -25,16 +25,16 @@ export default function CourseDetails({ course }: CourseDetailsProps) {
                     className="mb-14 text-foreground-heading"
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[36px]">
-                    {details.map((item, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-9">
+                    {details.map((item) => (
                         <CourseDetailsItem
-                            key={index}
+                            key={item.text}
                             iconSrc={item.iconSrc}
                             text={item.text}
                         />
                     ))}
                 </div>
-            </div>
+            </Container>
         </section>
     );
 }

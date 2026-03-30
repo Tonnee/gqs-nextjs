@@ -14,6 +14,7 @@
   --color-primary-deep: #050027;    /* High-contrast deep blue (FAQ) */
   --color-primary-soft: #0A004B;    /* Supporting dark containers */
   --color-secondary: #323B53;       /* Neutral blue supporting color */
+  --color-light-blue: #224BBE;
 
   /* --- Accent (Actions & Highlights) --- */
   --color-accent: #F58655;          /* Main Action Orange */

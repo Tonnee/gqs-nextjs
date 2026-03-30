@@ -2,7 +2,13 @@ import { notFound } from "next/navigation";
 import { courseData } from "@/features/home/data/course-data";
 import CourseHero from "@/features/courses/components/course-hero";
 import CourseMaterials from "@/features/courses/components/course-materials";
-import CourseDetails from "@/features/courses/components/coures-details";
+import CourseDetails from "@/features/courses/components/course-details";
+import CourseAccordion from "@/features/courses/components/course-accordion";
+import CourseMentor from "@/features/courses/components/mentor";
+import DemoClasses from "@/features/home/components/demo-classes";
+import CoursePayment from "@/features/courses/components/payment";
+import VisitChannel from "@/features/home/components/visit-channel";
+import Contact from "@/features/home/components/contact";
 
 interface PageProps {
     params: Promise<{
@@ -29,6 +35,14 @@ export default async function CoursePage({ params }: PageProps) {
             <CourseHero course={course} />
             <CourseMaterials materials={course.materials} />
             <CourseDetails course={course} />
+            {course.courseOutline && course.courseOutline.length > 0 && (
+                <CourseAccordion courseOutline={course.courseOutline} />
+            )}
+            <CourseMentor />
+            <DemoClasses/>
+            <CoursePayment course={course} />
+            <VisitChannel />
+            <Contact/>
         </main>
     );
 }

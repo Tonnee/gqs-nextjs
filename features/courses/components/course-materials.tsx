@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SectionHeading from "@/components/ui/section-heading";
+import { Container } from "@/components/layout/container";
 
 const MATERIALS = [
     {
@@ -37,7 +38,7 @@ export default function CourseMaterials({ materials }: CourseMaterialsProps) {
 
     return (
         <section className="bg-white py-16 md:py-36">
-            <div className="container mx-auto px-4">
+            <Container>
                 <SectionHeading
                     level={2}
                     topText="BOOKS"
@@ -62,7 +63,7 @@ export default function CourseMaterials({ materials }: CourseMaterialsProps) {
                         </div>
                     ))}
                 </div>
-            </div>
+            </Container>
         </section>
     );
 }
