@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CourseHero from "@/features/courses/components/course-hero";
 import { courseData } from "@/features/home/data/course-data";
 import CourseMaterials from "@/features/courses/components/course-materials";
-import CourseDetails from "@/features/courses/components/coures-details";
+import CourseDetails from "@/features/courses/components/course-details";
 
 export const metadata: Metadata = {
     title: "Our Courses | GRE Quant School",

@@ -1,11 +1,11 @@
 import { Container } from "@/components/layout/container";
 import { CtaButton } from "@/components/layout/cta-button";
 
-export default function VisitChannel() {
+export default function VisitChannel({className}: {className?: string}) {
     return (
-        <section className="mt-20 md:mt-24">
+        <section className={`mt-20 md:mt-24 ${className}`}>
             <Container>
-                <div className="bg-primary-soft rounded-3xl px-6 py-16 md:px-12 md:py-20 lg:px-44 lg:pt-22 lg:pb-14 text-center">
+                <div className={`bg-primary-soft rounded-3xl px-6 py-16 md:px-12 md:py-20 lg:px-44 lg:pt-22 lg:pb-14 text-center ${className}`}>
                     <h2 className="text-2xl md:text-3xl font-semibold text-white leading-snug">
                         96 videos and counting – dive into our growing library
                         of GRE Quant insights.

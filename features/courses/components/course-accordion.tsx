@@ -72,7 +72,7 @@ function AccordionItem({
                 <IoChevronUp
                     aria-hidden="true"
                     className={cn(
-                        "text-3xl flex-shrink-0 transition-transform duration-300",
+                        "text-3xl shrink-0 transition-transform duration-300",
                         isOpen ? "rotate-0 text-white" : "rotate-180 text-foreground-heading"
                     )}
                 />
@@ -94,7 +94,7 @@ function AccordionItem({
                     <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
                         {/* Thumbnail */}
                         {item.videoThumbnail && (
-                            <div className="relative w-full md:w-64 h-36 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100">
+                            <div className="relative w-full md:w-64 h-36 shrink-0 rounded-xl overflow-hidden bg-gray-100">
                                 <Image
                                     src={item.videoThumbnail}
                                     alt={item.title}
@@ -105,7 +105,7 @@ function AccordionItem({
                         )}
 
                         {/* Details */}
-                        <div className="flex flex-col gap-4 flex-grow">
+                        <div className="flex flex-col gap-4 grow">
                             <Link href={item.videoLink} target="_blank" rel="noopener noreferrer" className="text-xl font-semibold text-foreground-heading hover:text-accent transition-colors">
                                 {item.title}
                             </Link>

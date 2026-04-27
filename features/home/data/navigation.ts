@@ -16,7 +16,7 @@ export interface FooterLinkSection {
 export const NAV_LINKS: NavLink[] = [
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
-    { name: "KMF Questions", href: "/courses/kmf-1147-questions" },
+    { name: "KMF Questions", href: "/kmf-questions" },
     { name: "Video Materials", href: "/video-materials" },
     { name: "Reviews", href: "/reviews" },
     { name: "Contact", href: "/contact" },

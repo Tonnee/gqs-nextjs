@@ -1,4 +1,10 @@
 import type { Metadata } from "next";
+import VideoMaterialsHero from "@/features/video-materials/components/video-materials-hero";
+import VideoMaterialsGrid from "@/features/video-materials/components/video-materials-grid";
+import MasterPieces from "@/features/home/components/master-pieces";
+import UpcomingCourses from "@/features/home/components/upcoming-courses";
+import VisitChannel from "@/features/home/components/visit-channel";
+import Contact from "@/features/home/components/contact";
 
 export const metadata: Metadata = {
     title: "Video Materials | GRE Quant School",
@@ -7,17 +13,13 @@ export const metadata: Metadata = {
 
 export default function VideoMaterialsPage() {
     return (
-        <main className="flex min-h-screen flex-col items-center px-4 py-24 sm:px-6 lg:px-8">
-            <section className="mx-auto w-full max-w-7xl">
-                <header className="mb-12">
-                    <h1 className="font-poppins text-4xl font-bold tracking-tight text-primary-deep sm:text-5xl">
-                        Video Materials
-                    </h1>
-                </header>
-                <div className="font-raleway text-base text-neutral-600 leading-relaxed">
-                    <p>Access our extensive library of recorded problem-solving sessions and concept breakdowns.</p>
-                </div>
-            </section>
+        <main className="flex min-h-screen flex-col">
+            <VideoMaterialsHero />
+            <VideoMaterialsGrid />
+            <MasterPieces />
+            <UpcomingCourses />
+            <VisitChannel />
+            <Contact />
         </main>
     );
 }

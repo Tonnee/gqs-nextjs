@@ -19,10 +19,9 @@ export function Navbar() {
     const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
     return (
-        <nav className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/70 backdrop-blur-md transition-all font-poppins" aria-label="Main Navigation">
+        <nav className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/70 backdrop-blur-md transition-all font-poppins select-none" aria-label="Main Navigation">
             <Container>
                 <div className="flex h-20 items-center justify-between">
-                    
                     {/* 1. Left: Logo */}
                     <div className="flex shrink-0 items-center">
                         <Link 
