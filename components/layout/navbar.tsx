@@ -12,6 +12,12 @@ import { cn } from "@/lib/utils";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DualText from "@/components/ui/dual-text";
 
+const kmfLinks = [
+    { name: "KMF latest 1794", href: "/kmf-questions/kmf-latest-1794" },
+    { name: "KMF 1147", href: "/kmf-questions/kmf-1147" },
+    { name: "KMF Verbal", href: "/kmf-questions/kmf-verbal" },
+];
+
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
@@ -47,7 +53,8 @@ export function Navbar() {
                             {NAV_LINKS.map((link) => {
                                 const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
                                 
-                                if (link.name === "Courses") {
+                                if (link.name === "Courses" || link.name === "KMF Questions") {
+                                    const isCourses = link.name === "Courses";
                                     return (
                                         <li key={link.name} className="group flex items-center h-20">
                                             <Link
@@ -64,30 +71,43 @@ export function Navbar() {
 
                                             <div className="absolute top-[80px] left-0 w-full bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out cursor-default border-t border-gray-100">
                                                 <Container>
-                                                    <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-20 py-14">
-                                                        {courseData.map((course) => (
-                                                            <div key={course.slug} className="flex flex-col space-y-2 group/course">
-                                                                <p className="text-accent text-sm font-semibold uppercase tracking-wider mb-4">{course.courseLevel}</p>
-                                                                <Link href={course.courseLink} className="text-foreground-heading text-3xl leading-tight font-semibold group-hover/course:text-accent transition-colors">
-                                                                    {course.courseName}
-                                                                </Link>
-                                                                <div className="flex flex-col mt-10">
-                                                                    <DualText lightText="Starts:" boldText={course.startDate} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
-                                                                    <DualText lightText="Days:" boldText={course.days} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
-                                                                    <DualText lightText="Time:" boldText={course.time} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-0" fontClass="text-sm" />
+                                                    {isCourses ? (
+                                                        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-20 py-14">
+                                                            {courseData.map((course) => (
+                                                                <div key={course.slug} className="flex flex-col space-y-2 group/course">
+                                                                    <p className="text-accent text-sm font-semibold uppercase tracking-wider mb-4">{course.courseLevel}</p>
+                                                                    <Link href={course.courseLink} className="text-foreground-heading text-3xl leading-tight font-semibold group-hover/course:text-accent transition-colors">
+                                                                        {course.courseName}
+                                                                    </Link>
+                                                                    <div className="flex flex-col mt-10">
+                                                                        <DualText lightText="Starts:" boldText={course.startDate} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
+                                                                        <DualText lightText="Days:" boldText={course.days} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
+                                                                        <DualText lightText="Time:" boldText={course.time} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-0" fontClass="text-sm" />
+                                                                    </div>
                                                                 </div>
+                                                            ))}
+                                                            {/* 4th Column Image displays only for xl screens */}
+                                                            <div className="hidden xl:block relative w-full h-[350px] rounded-lg overflow-hidden shadow-sm">
+                                                                <Image
+                                                                    src="/images/course-banner.png"
+                                                                    alt="Latest Courses"
+                                                                    fill
+                                                                    className="object-cover transition-transform hover:scale-105 duration-500"
+                                                                />
                                                             </div>
-                                                        ))}
-                                                        {/* 4th Column Image displays only for xl screens */}
-                                                        <div className="hidden xl:block relative w-full h-[350px] rounded-lg overflow-hidden shadow-sm">
-                                                            <Image
-                                                                src="/images/course-banner.png"
-                                                                alt="Latest Courses"
-                                                                fill
-                                                                className="object-cover transition-transform hover:scale-105 duration-500"
-                                                            />
                                                         </div>
-                                                    </div>
+                                                    ) : (
+                                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-10">
+                                                            {kmfLinks.map((kmf) => (
+                                                                <Link key={kmf.href} href={kmf.href} className="flex flex-col space-y-2 group/kmf p-6 rounded-xl hover:bg-background-subtle transition-colors">
+                                                                    <span className="text-foreground-heading text-2xl font-semibold group-hover/kmf:text-accent transition-colors">
+                                                                        {kmf.name}
+                                                                    </span>
+                                                                    <span className="text-sm text-foreground-muted">Practice the best GRE questions from our updated bank.</span>
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    )}
                                                 </Container>
                                             </div>
                                         </li>
@@ -115,10 +135,11 @@ export function Navbar() {
                     {/* 3. Right: Desktop CTA Button */}
                     <div className="hidden lg:flex shrink-0 items-center justify-end">
                         <CtaButton
-                            href="/upcoming-batch"
+                            href="https://wa.me/+8801833455635"
                             className="block px-6 py-2.5 text-sm"
+                            target="_blank"
                         >
-                            Upcoming Batch
+                            Join Our Course
                         </CtaButton>
                     </div>
 
@@ -172,7 +193,8 @@ export function Navbar() {
                             {NAV_LINKS.map((link) => {
                                 const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
                                 
-                                if (link.name === "Courses") {
+                                if (link.name === "Courses" || link.name === "KMF Questions") {
+                                    const isCourses = link.name === "Courses";
                                     return (
                                         <li key={link.name}>
                                             <div className="flex flex-col">
@@ -189,17 +211,30 @@ export function Navbar() {
                                                     <MdKeyboardArrowDown className="text-xl" />
                                                 </Link>
                                                 <div className="pl-6 pr-3 py-2 flex flex-col space-y-3 mb-2 mt-1">
-                                                    {courseData.map((course) => (
-                                                        <Link 
-                                                            key={course.slug} 
-                                                            href={course.courseLink} 
-                                                            className="flex flex-col space-y-1 bg-gray-50/50 p-2 rounded-md hover:bg-gray-100 transition-colors"
-                                                            onClick={() => setIsMobileMenuOpen(false)}
-                                                        >
-                                                            <span className="text-sm font-semibold text-primary">{course.courseName}</span>
-                                                            <span className="text-xs text-foreground-muted">{course.startDate} • {course.time}</span>
-                                                        </Link>
-                                                    ))}
+                                                    {isCourses ? (
+                                                        courseData.map((course) => (
+                                                            <Link 
+                                                                key={course.slug} 
+                                                                href={course.courseLink} 
+                                                                className="flex flex-col space-y-1 bg-gray-50/50 p-2 rounded-md hover:bg-gray-100 transition-colors"
+                                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                            >
+                                                                <span className="text-sm font-semibold text-primary">{course.courseName}</span>
+                                                                <span className="text-xs text-foreground-muted">{course.startDate} • {course.time}</span>
+                                                            </Link>
+                                                        ))
+                                                    ) : (
+                                                        kmfLinks.map((kmf) => (
+                                                            <Link 
+                                                                key={kmf.href} 
+                                                                href={kmf.href} 
+                                                                className="flex flex-col space-y-1 bg-gray-50/50 p-2 rounded-md hover:bg-gray-100 transition-colors"
+                                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                            >
+                                                                <span className="text-sm font-semibold text-primary">{kmf.name}</span>
+                                                            </Link>
+                                                        ))
+                                                    )}
                                                 </div>
                                             </div>
                                         </li>

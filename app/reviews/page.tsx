@@ -1,3 +1,9 @@
+import Contact from "@/features/home/components/contact";
+import MasterPieces from "@/features/home/components/master-pieces";
+import Reviews from "@/features/home/components/review";
+import UpcomingCourses from "@/features/home/components/upcoming-courses";
+import VisitChannel from "@/features/home/components/visit-channel";
+import ReviewsList from "@/features/reviews/components/reviews-list";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,17 +13,13 @@ export const metadata: Metadata = {
 
 export default function ReviewsPage() {
     return (
-        <main className="flex min-h-screen flex-col items-center px-4 py-24 sm:px-6 lg:px-8">
-            <section className="mx-auto w-full max-w-7xl">
-                <header className="mb-12">
-                    <h1 className="font-poppins text-4xl font-bold tracking-tight text-primary-deep sm:text-5xl">
-                        Student Reviews
-                    </h1>
-                </header>
-                <div className="font-raleway text-base text-neutral-600 leading-relaxed">
-                    <p>Discover how our courses have transformed GRE scores for students worldwide.</p>
-                </div>
-            </section>
+        <main className="min-h-screen">
+            <Reviews className="bg-primary" />
+            <ReviewsList />
+            <MasterPieces />
+            <UpcomingCourses />
+            <VisitChannel />
+            <Contact/>
         </main>
     );
 }

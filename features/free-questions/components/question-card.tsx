@@ -77,7 +77,7 @@ export default function QuestionCard({
     const isOverTime = elapsedTime > stdTime;
 
     return (
-        <div ref={cardRef} className="bg-white p-6 md:p-8 mb-6">
+        <div ref={cardRef} className="bg-white p-6 md:p-8 mb-32">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 
                 {/* First 3 columns: Question info & Stopwatch */}
@@ -97,7 +97,7 @@ export default function QuestionCard({
                     <div className="flex flex-row items-center">
                         <div className="flex items-center mr-10">
                             <FiClock className="text-accent text-[28px] mr-2" />
-                            <span className={`font-poppins text-[24px] font-semibold ${isOverTime ? 'text-accent' : 'text-primary'}`}>
+                            <span className={`font-poppins text-xl font-semibold ${isOverTime ? 'text-accent' : 'text-primary'}`}>
                                 {timeText}
                             </span>
                         </div>

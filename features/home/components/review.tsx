@@ -6,27 +6,31 @@ import ReviewCard from "./review-card";
 import CenterText from "@/components/ui/center-text";
 import { cn } from "@/lib/utils";
 
-export default function Reviews() {
+export default function Reviews({className}: {className?: string}) {
+    const isDark = className?.includes("bg-primary") || className?.includes("bg-primary-deep") || className?.includes("bg-accent-dark");
+
     return (
-        <section className="py-16 md:py-28 mb-8">
+        <section className={cn("py-16 md:py-28 mb-8 ", className)}>
             <Container>
                 <div className="flex flex-col items-center">
                     <SectionHeading
                         level={3}
                         headingText="Success Stories from Our Students"
                         topText="Reviews"
+                        className={isDark ? "text-white" : ""}
                     />
 
                     <CenterText
                         text="Our students’ success is our greatest achievement. From mastering GRE Quant strategies to achieving their dream scores, their journeys are a testament to our effective guidance. Read their stories of perseverance, growth, and triumph. Let their success inspire and motivate you to reach your goals too!"
-                        className="mt-6 md:mt-8 mb-8 md:mb-10 text-center"
+                        className={cn("mt-6 md:mt-8 mb-8 md:mb-10 text-center", isDark ? "text-white" : "")}
                     />
 
                     <div className="text-center w-full flex justify-center mb-12 md:mb-16">
                         <CtaButton
                             href="/"
-                            baseColorClass="bg-accent"
-                            hoverColorClass="bg-primary"
+                            baseColorClass={isDark ? "bg-white" : "bg-accent"}
+                            hoverColorClass={isDark ? "bg-accent" : "bg-primary"}
+                            textColorClass={isDark ? "text-primary hover:text-white" : "text-white hover:text-white"}
                             className="px-8 py-3"
                         >
                             See More Reviews

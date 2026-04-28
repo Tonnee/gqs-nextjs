@@ -13,6 +13,7 @@ interface CtaButtonProps {
     hoverColorClass?: string;
     textColorClass?: string;
     download?: boolean;
+    target?: string;
 }
 
 export function CtaButton({ 
@@ -23,7 +24,8 @@ export function CtaButton({
     baseColorClass = "bg-accent",
     hoverColorClass = "bg-primary",
     textColorClass = "text-white hover:text-white",
-    download = false
+    download = false,
+    target
 }: CtaButtonProps) {
     const buttonRef = useRef<HTMLAnchorElement>(null);
     const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
@@ -50,6 +52,7 @@ export function CtaButton({
             onClick={onClick}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            target={target}
             className={cn(
                 "group relative overflow-hidden rounded-full font-normal shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent inline-block text-center transition-colors duration-500 ease-out",
                 baseColorClass,

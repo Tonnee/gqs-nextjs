@@ -1,3 +1,5 @@
+import Contact from "@/features/home/components/contact";
+import VisitChannel from "@/features/home/components/visit-channel";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,17 +9,13 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     return (
-        <main className="flex min-h-screen flex-col items-center px-4 py-24 sm:px-6 lg:px-8">
-            <section className="mx-auto w-full max-w-7xl">
-                <header className="mb-12">
-                    <h1 className="font-poppins text-4xl font-bold tracking-tight text-primary-deep sm:text-5xl">
-                        Contact Us
-                    </h1>
-                </header>
-                <div className="font-raleway text-base text-neutral-600 leading-relaxed">
-                    <p>Have questions about enrollment or need technical support? We are here to help!</p>
-                </div>
-            </section>
+        <main className="min-h-screen">
+            <VisitChannel 
+                headingText="14K followers and counting - Join our facebook group to get the latest updates."
+                descriptionText="Explore our Facebook group for expert tips, problem-solving strategies, and free GRE Quant lessons. Watch, learn, and practice with engaging videos designed to boost your preparation. Subscribe now to stay updated and take your GRE prep to the next level!"
+                ctaText="Join our Facebook Group"
+            />
+            <Contact />
         </main>
     );
 }

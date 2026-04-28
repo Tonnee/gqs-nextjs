@@ -24,7 +24,7 @@ export interface KmfQuestionPageData {
 
 export const kmfQuestionsData: KmfQuestionPageData[] = [
     {
-        slug: "verbal",
+        slug: "kmf-verbal",
         title: "KMF Verbal\nQuestions",
         subtitle: "102 questions with Answers",
         backgroundImage: "/images/kmf-questions.png",
@@ -79,10 +79,17 @@ export const kmfQuestionsData: KmfQuestionPageData[] = [
         ]
     },
     {
-        slug: "quant",
-        title: "KMF Quant\nQuestions",
-        subtitle: "150 questions with Answers",
+        slug: "kmf-latest-1794",
+        title: "KMF Latest 1794\nQuestions",
+        subtitle: "1794 latest questions with Answers",
         backgroundImage: "/images/kmf-questions.png",
-        sections: [] // Add empty sections array for now
+        sections: []
+    },
+    {
+        slug: "kmf-1147",
+        title: "KMF 1147\nQuestions",
+        subtitle: "1147 questions with Answers",
+        backgroundImage: "/images/kmf-questions.png",
+        sections: []
     }
 ];
