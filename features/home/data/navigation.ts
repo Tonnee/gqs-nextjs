@@ -22,6 +22,12 @@ export const NAV_LINKS: NavLink[] = [
     { name: "Contact", href: "/contact" },
 ];
 
+export const KMF_LINKS: NavLink[] = [
+    { name: "KMF latest 1794", href: "/kmf-questions/kmf-latest-1794" },
+    { name: "KMF 1147", href: "/kmf-questions/kmf-1147" },
+    { name: "KMF Verbal", href: "/kmf-questions/kmf-verbal" },
+];
+
 export const FOOTER_LINKS: FooterLinkSection[] = [
     {
         title: "Our Courses",

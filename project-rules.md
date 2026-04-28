@@ -52,7 +52,9 @@ Follow a strictly feature-based architecture. Global UI elements go in `componen
 - **Constants:** ALWAYS use `UPPER_SNAKE_CASE` for global, non-changing constants (e.g., `MAX_RETRY_COUNT`).
 
 ## 5. Tailwind Styling Rules
-- **Utility-First:** Exclusively use Tailwind CSS v4 utility classes. **DO NOT** write custom CSS in `.css` files unless absolutely required for highly complex animations or root level base styles (`app/globals.css`).
+- **Utility-First:** Exclusively use Tailwind CSS v4 utility classes. **DO NOT** write custom CSS in `.css` files unless absolutely required for highly complex animations or root-level base styles.
+- **No Arbitrary Values:** **DO NOT** use Tailwind's arbitrary values (e.g., `w-[150px]`, `text-[#ff0000]`, `mt-[2rem]`). If a specific value is needed, it must be added to the design tokens via the `@theme` directive in `app/globals.css` and used as a named utility class (e.g., `w-card`, `text-primary`).
+- **V4 Configuration (CSS-in-CSS):** Tailwind v4 uses CSS for configuration. Do not use or create `tailwind.config.ts` or `tailwind.config.js`. Define all custom colors, fonts, and theme extensions using the `@theme` directive in `app/globals.css` (e.g., `--color-primary: #...;`). Include `@import "tailwindcss";` at the top of your main CSS file.
 - **Class Merging:** ALWAYS use a class merge utility (`cn` combining `clsx` and `tailwind-merge`) for dynamic class names to avoid specificity clashing.
   ```typescript
   // Example utility implementation expectation

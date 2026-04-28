@@ -14,7 +14,7 @@ export default function VisitChannel({
     headingText = "96 videos and counting – dive into our growing library of GRE Quant insights.",
     descriptionText = "Explore our YouTube channel for expert tips, problem-solving strategies, and free GRE Quant lessons. Watch, learn, and practice with engaging videos designed to boost your preparation. Subscribe now to stay updated and take your GRE prep to the next level!",
     ctaText = "Visit our YouTube Channel",
-    ctaLink = "#"
+    ctaLink = "https://youtube.com"
 }: VisitChannelProps) {
     return (
         <section className={`mt-20 md:mt-24 ${className}`}>

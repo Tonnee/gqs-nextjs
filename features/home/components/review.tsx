@@ -6,7 +6,11 @@ import ReviewCard from "./review-card";
 import CenterText from "@/components/ui/center-text";
 import { cn } from "@/lib/utils";
 
-export default function Reviews({className}: {className?: string}) {
+interface ReviewsProps {
+    className?: string;
+}
+
+export default function Reviews({ className }: ReviewsProps) {
     const isDark = className?.includes("bg-primary") || className?.includes("bg-primary-deep") || className?.includes("bg-accent-dark");
 
     return (

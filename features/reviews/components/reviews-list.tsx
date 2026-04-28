@@ -6,15 +6,16 @@ import ReviewListCard from "./review-list-card";
 import Pagination from "@/components/ui/pagination";
 import { reviewsListData } from "../data/reviews-list-data";
 
+const REVIEWS_PER_PAGE = 10;
+
 export default function ReviewsList() {
     const [currentPage, setCurrentPage] = useState(1);
-    const reviewsPerPage = 10;
     
-    const indexOfLastReview = currentPage * reviewsPerPage;
-    const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+    const indexOfLastReview = currentPage * REVIEWS_PER_PAGE;
+    const indexOfFirstReview = indexOfLastReview - REVIEWS_PER_PAGE;
     const currentReviews = reviewsListData.slice(indexOfFirstReview, indexOfLastReview);
     
-    const totalPages = Math.ceil(reviewsListData.length / reviewsPerPage);
+    const totalPages = Math.ceil(reviewsListData.length / REVIEWS_PER_PAGE);
 
     const handlePageChange = (pageNumber: number) => {
         setCurrentPage(pageNumber);
