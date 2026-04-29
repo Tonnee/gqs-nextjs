@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Container } from "./container";
+import { Container } from "@/components/layout/container";
 import { Announcement, defaultLeft, defaultRight } from "@/features/home/data/announcements";
 import { cn } from "@/lib/utils";
 

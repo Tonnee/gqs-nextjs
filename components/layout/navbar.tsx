@@ -4,14 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Container } from "./container";
-import { CtaButton } from "./cta-button";
+import { Container } from "@/components/layout/container";
+import { CtaButton } from "@/components/layout/cta-button";
 import { NAV_LINKS, KMF_LINKS } from "@/features/home/data/navigation";
 import { courseData } from "@/features/home/data/course-data";
 import { cn } from "@/lib/utils";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DualText from "@/components/ui/dual-text";
-import { MobileMenu } from "./mobile-menu";
+import { MobileMenu } from "@/components/layout/mobile-menu";
 
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

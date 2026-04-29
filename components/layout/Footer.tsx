@@ -1,9 +1,9 @@
-import { Container } from "./container";
-import SocialIcon from "../ui/social-icon";
+import { Container } from "@/components/layout/container";
+import SocialIcon from "@/components/ui/social-icon";
 import { FaFacebookF, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { FOOTER_LINKS, LEGAL_LINKS, type FooterLinkSection, type FooterLinkItemType } from "@/features/home/data/navigation";
 import Link from "next/link";
-import FooterLinkItem from "../ui/footer-link-item";
+import FooterLinkItem from "@/components/ui/footer-link-item";
 
 export default function Footer() {
     return (

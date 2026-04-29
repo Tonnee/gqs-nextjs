@@ -1,4 +1,4 @@
-import Heading from "./heading";
+import Heading from "@/components/ui/heading";
 import { HeadingLevel } from "@/types";
 
 interface SectionHeadingProps {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { CtaButton } from "./cta-button";
+import { CtaButton } from "@/components/layout/cta-button";
 import { NAV_LINKS, KMF_LINKS } from "@/features/home/data/navigation";
 import { courseData } from "@/features/home/data/course-data";
 
