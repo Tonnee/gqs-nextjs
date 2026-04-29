@@ -3,7 +3,7 @@ import VideoMaterialsHero from "@/features/video-materials/components/video-mate
 import VideoMaterialsGrid from "@/features/video-materials/components/video-materials-grid";
 import MasterPieces from "@/features/home/components/master-pieces";
 import UpcomingCourses from "@/features/home/components/upcoming-courses";
-import VisitChannel from "@/features/home/components/visit-channel";
+import VisitSocial from "@/features/home/components/visit-social";
 import Contact from "@/features/home/components/contact";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function VideoMaterialsPage() {
             <VideoMaterialsGrid />
             <MasterPieces />
             <UpcomingCourses />
-            <VisitChannel />
+            <VisitSocial />
             <Contact />
         </main>
     );

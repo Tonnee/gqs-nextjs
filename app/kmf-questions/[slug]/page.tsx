@@ -5,7 +5,7 @@ import KmfQuestionsHero from "@/features/kmf-questions/components/kmf-questions-
 import KmfCourseContent from "@/features/kmf-questions/components/kmf-course-content";
 import CourseHero from "@/features/courses/components/course-hero";
 import { courseData } from "@/features/home/data/course-data";
-import VisitChannel from "@/features/home/components/visit-channel";
+import VisitSocial from "@/features/home/components/visit-social";
 import Contact from "@/features/home/components/contact";
 
 export function generateStaticParams() {
@@ -40,7 +40,7 @@ export default async function KmfQuestionsSlugPage({ params }: { params: Promise
             <KmfQuestionsHero data={data} />
             <KmfCourseContent data={data} />
             <CourseHero course={course} />
-            <VisitChannel className="mt-28"/>
+            <VisitSocial className="mt-28"/>
             <Contact/>
         </main>
     );

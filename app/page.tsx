@@ -3,7 +3,7 @@ import Reviews from "@/features/home/components/review";
 import UpcomingCourses from "@/features/home/components/upcoming-courses";
 import DemoClasses from "@/features/home/components/demo-classes";
 import MasterPieces from "@/features/home/components/master-pieces";
-import VisitChannel from "@/features/home/components/visit-channel";
+import VisitSocial from "@/features/home/components/visit-social";
 import Contact from "@/features/home/components/contact";
 import HomeFaq from "@/features/home/components/home-faq";
 
@@ -14,7 +14,7 @@ export default function Home() {
         <Reviews />
         <DemoClasses />
         <MasterPieces />
-        <VisitChannel />
+        <VisitSocial />
         <Contact />
         <HomeFaq/>
     </>;

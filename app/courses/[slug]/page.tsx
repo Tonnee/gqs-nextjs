@@ -7,7 +7,7 @@ import CourseAccordion from "@/features/courses/components/course-accordion";
 import CourseMentor from "@/features/courses/components/mentor";
 import DemoClasses from "@/features/home/components/demo-classes";
 import CoursePayment from "@/features/courses/components/payment";
-import VisitChannel from "@/features/home/components/visit-channel";
+import VisitSocial from "@/features/home/components/visit-social";
 import Contact from "@/features/home/components/contact";
 
 interface PageProps {
@@ -41,7 +41,7 @@ export default async function CoursePage({ params }: PageProps) {
             <CourseMentor />
             <DemoClasses/>
             <CoursePayment course={course} />
-            <VisitChannel />
+            <VisitSocial />
             <Contact/>
         </main>
     );
