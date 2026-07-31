@@ -20,6 +20,15 @@ export interface CourseInfo {
     courseOutline?: CourseOutlineItem[];
     fees?: string;
     courseDuration?: string;
+    // Dynamic fields for Course Details, Resources & Payment
+    customDetailsText?: string[];
+    resourcesText?: string;
+    paymentInstructions?: string;
+    paymentMethodsText?: string;
+    refundPolicyText?: string;
+    // Optional BOOKS block settings
+    showBooks?: boolean;
+    books?: Array<{ src: string; alt: string; title?: string }>;
 }
 
 export const courseData: CourseInfo[] = [
@@ -40,7 +49,11 @@ export const courseData: CourseInfo[] = [
         totalClasses: "24",
         courseOutline: beatGreQuantOutlineData,
         fees: "3000 BDT",
-        courseDuration: "2 Months"
+        courseDuration: "2 Months",
+        paymentInstructions: "(You need to pay the 1st Month's Payment to Confirm your Seat, then before starting the 2nd Month, another payment)",
+        paymentMethodsText: "We accept Bkash, Rocket, Nagad, DBBL, IFIC, & Brac Bank",
+        refundPolicyText: "*** Our Amazing Policy, if you find this Course is not FIT for you within 3 Classes, you will get 100% REFUND of your FEE",
+        showBooks: true,
     },
     {
         slug: "beat-kmf",
@@ -58,7 +71,11 @@ export const courseData: CourseInfo[] = [
         totalClasses: "36",
         courseOutline: beatKmfOutlineData,
         fees: "5000 BDT",
-        courseDuration: "3 Months"
+        courseDuration: "3 Months",
+        paymentInstructions: "(You need to pay the 1st Month's Payment to Confirm your Seat, then before starting the 2nd Month, another payment)",
+        paymentMethodsText: "We accept Bkash, Rocket, Nagad, DBBL, IFIC, & Brac Bank",
+        refundPolicyText: "*** Our Amazing Policy, if you find this Course is not FIT for you within 3 Classes, you will get 100% REFUND of your FEE",
+        showBooks: true,
     },
     {
         slug: "mock-test",
@@ -76,6 +93,10 @@ export const courseData: CourseInfo[] = [
         totalClasses: "24",
         courseOutline: mockTestOutlineData,
         fees: "4000 BDT",
-        courseDuration: "1 Month"
+        courseDuration: "1 Month",
+        paymentInstructions: "(You need to pay the 1st Month's Payment to Confirm your Seat, then before starting the 2nd Month, another payment)",
+        paymentMethodsText: "We accept Bkash, Rocket, Nagad, DBBL, IFIC, & Brac Bank",
+        refundPolicyText: "*** Our Amazing Policy, if you find this Course is not FIT for you within 3 Classes, you will get 100% REFUND of your FEE",
+        showBooks: true,
     },
 ];

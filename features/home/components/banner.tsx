@@ -6,13 +6,16 @@ import BannerImg from "@/public/images/banner.png";
 import { CtaButton } from "@/components/layout/cta-button";
 import Heading from "@/components/ui/heading";
 import VideoModal from "./video-modal";
+import { LandingData, defaultLandingData } from "../data/landing-types";
 
-// ---------------------------------------------------------------------------
-// Banner — main section component
-// ---------------------------------------------------------------------------
+interface BannerProps {
+    data?: LandingData;
+}
 
-export default function Banner() {
+export default function Banner({ data = defaultLandingData }: BannerProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const imageUrl = data.heroImageUrl || BannerImg;
 
     return (
         <section className="bg-primary w-full min-h-227.5 relative">
@@ -21,8 +24,8 @@ export default function Banner() {
                 {/* Image + play button */}
                 <div className="w-full xl:w-1/2 h-125 xl:h-227.5 relative">
                     <Image
-                        src={BannerImg}
-                        alt="GRE Quant School Banner image"
+                        src={imageUrl}
+                        alt={data.heroTitle || "GRE Quant School Banner image"}
                         fill
                         priority
                         className="object-cover object-center"
@@ -59,28 +62,26 @@ export default function Banner() {
                 <div className="w-full xl:w-1/2 flex flex-col justify-center px-6 md:px-12 xl:pl-28 xl:pr-8 py-16 xl:py-0">
                     <div className="max-w-3xl">
                         <p className="font-poppins text-accent text-base font-medium tracking-widest uppercase">
-                            GRE Quant School
+                            {data.heroSubtitle || "GRE Quant School"}
                         </p>
-                        <Heading level={1} className="text-4xl md:text-5xl lg:text-6xl font-raleway font-bold tracking-widest leading-tight text-white/90" >
-                            Master GRE Quant with Precision and Confidence
+                        <Heading level={1} className="text-4xl md:text-5xl lg:text-6xl font-raleway font-bold tracking-widest leading-tight text-white/90">
+                            {data.heroTitle}
                         </Heading>
                         <p className="text-lg max-w-xl mt-6 md:mt-10.5 text-white/75 leading-relaxed">
-                            Learn smarter strategies, solve faster, and score higher
-                            with ease. Join thousands who have aced GRE Quant with our
-                            help!
+                            {data.heroDescription}
                         </p>
                         <div className="mt-10 md:mt-20 text-white uppercase flex flex-col sm:flex-row items-start sm:items-center sm:bg-white/10 w-max rounded-full sm:pr-2 sm:py-2 sm:pl-8">
                             <span className="text-sm md:text-base text-left mb-4 sm:mb-0">
-                                Get <span className="text-accent font-semibold mx-1">50% discount</span> on course fee
+                                {data.offerBadgeText}
                             </span>
                             <CtaButton
-                                href="/"
+                                href={data.offerCtaLink || "/"}
                                 className="w-max sm:w-auto py-3 px-6 sm:ml-6 font-poppins text-base font-medium capitalize whitespace-nowrap"
                                 baseColorClass="bg-white"
                                 textColorClass="text-primary hover:text-white"
                                 hoverColorClass="bg-accent"
                             >
-                                Join Today
+                                {data.offerCtaText || "Join Today"}
                             </CtaButton>
                         </div>
                     </div>
@@ -90,6 +91,7 @@ export default function Banner() {
             <VideoModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
+                videoUrl={data.videoUrl}
             />
         </section>
     );

@@ -6,16 +6,21 @@ import MasterPieces from "@/features/home/components/master-pieces";
 import VisitSocial from "@/features/home/components/visit-social";
 import Contact from "@/features/home/components/contact";
 import HomeFaq from "@/features/home/components/home-faq";
+import { getLandingDataServer } from "@/features/home/data/landing-server";
 
 export default function Home() {
-    return <>
-        <Banner />
-        <UpcomingCourses />
-        <Reviews />
-        <DemoClasses />
-        <MasterPieces />
-        <VisitSocial />
-        <Contact />
-        <HomeFaq/>
-    </>;
+    const landingData = getLandingDataServer();
+
+    return (
+        <>
+            <Banner data={landingData} />
+            <UpcomingCourses />
+            <Reviews />
+            <DemoClasses />
+            <MasterPieces />
+            <VisitSocial />
+            <Contact />
+            <HomeFaq />
+        </>
+    );
 }

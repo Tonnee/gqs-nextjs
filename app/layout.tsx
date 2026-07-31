@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Raleway } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
-import { Navbar } from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
-import GoToTop from "@/components/ui/go-to-top";
+import { PublicLayout } from "@/components/layout/public-layout";
 import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
@@ -31,15 +29,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={cn(poppins.variable, raleway.variable)}>
+        <html lang="en" className={cn(poppins.variable, raleway.variable)} suppressHydrationWarning>
             <body
                 className="font-sans antialiased"
+                suppressHydrationWarning
             >
-                <Header />
-                <Navbar />
-                {children}
-                <Footer />
-                <GoToTop />
+                <PublicLayout header={<Header />}>{children}</PublicLayout>
             </body>
         </html>
     );

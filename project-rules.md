@@ -1,111 +1,151 @@
-# Project Rules
+# Project Rules — Fullstack Next.js Architecture
 
-This document outlines the strict core development principles and standards for this repository. It serves as the definitive guide for both human developers and AI assistants to ensure senior-level, scalable, and production-ready code.
+This document outlines the strict core development principles, folder structure, and engineering standards for this repository. It serves as the definitive guide for human developers and AI assistants to ensure clean, scalable, type-safe, and production-ready code.
 
 **AI Assistants:** You must adhere strictly to these rules in every response and code generation. Do not deviate.
 
 ---
 
 ## 1. Core Development Principles
-- **Simplicity & Readability:** Write clean, self-documenting code. Prefer simple, explicit logic over clever abstractions. Re-read code to ensure a junior developer could understand it.
-- **Server-First Approach:** Next.js App Router defaults to React Server Components (RSC). **ONLY** use standard React Client Components (via `"use client"`) when interactivity, hooks, or browser APIs are strictly required. Do not use `"use client"` globally or unnecessarily.
-- **Modularity & Composition:** Ensure components and utilities are highly reusable, decoupled, and focused on a single responsibility (Single Responsibility Principle). Use composition (passing `children`) to avoid massive prop lists.
-- **Minimal Dependencies:** **DO NOT** add new dependencies unless explicitly authorized. Rely entirely on the existing tech stack.
-- **Zero Warnings:** All code must pass strict TypeScript checks and ESLint rules without warnings. Committing code with warnings or `any` types is strictly prohibited.
+- **Simplicity & Readability:** Write clean, self-documenting code. Prefer simple, explicit logic over clever abstractions. Re-read code to ensure a junior developer could easily understand it.
+- **Server-First Approach:** Next.js App Router defaults to React Server Components (RSC). **ONLY** use standard React Client Components (via `"use client"`) when interactivity, state hooks (`useState`, `useEffect`), custom hooks, or DOM event listeners are strictly required.
+- **Fullstack Data Integrity:** Validate all client-server boundaries (Server Actions, API Route Handlers) using type-safe schema validation (Zod). Never trust unvalidated input on the server.
+- **Modularity & Composition:** Ensure components and utilities are highly reusable, decoupled, and focused on a single responsibility (Single Responsibility Principle). Use composition (passing `children`) to avoid prop-drilling and bloated prop lists.
+- **Minimal Dependencies:** **DO NOT** add new npm packages unless explicitly authorized by the user. Rely entirely on the existing tech stack.
+- **Zero Warnings:** All code must pass strict TypeScript compiler checks and ESLint rules without warnings. Using `any` types or suppressing lint rules (`// @ts-ignore`) without solid written justification is strictly prohibited.
 
-## 2. Folder Structure for Scalable Next.js Projects
-Follow a strictly feature-based architecture. Global UI elements go in `components/ui`, while feature-specific components remain co-located with their features.
+---
+
+## 2. Folder Structure for Scalable Fullstack Next.js Projects
+Follow a strictly domain-driven, feature-based architecture. Global UI elements reside in `components/`, while domain features are co-located in `features/`.
+
 ```text
 /
 ├── app/                  # Next.js App Router (pages, layouts, route handlers, error/loading states)
-├── components/           # Reusable, global UI components
-│   ├── ui/               # Primitive generic UI elements (buttons, inputs)
-│   ├── layout/           # Global layouts (navbar, footer, sidebar)
-│   └── shared/           # Complex shared components
-├── features/             # Feature-based modules (domain-driven design)
+│   ├── api/              # API Route Handlers (REST / Webhooks)
+│   ├── (auth)/           # Auth route group (login, register)
+│   └── [route]/          # App pages & layouts
+├── components/           # Global reusable UI elements
+│   ├── ui/               # Generic primitive UI elements (buttons, inputs, cards)
+│   ├── layout/           # Global layout components (header, navbar, footer, container)
+│   └── shared/           # Complex shared components (data tables, modal frames)
+├── features/             # Domain-driven feature modules
 │   └── [feature-name]/
 │       ├── components/   # Feature-specific components
-│       ├── actions/      # Next.js Server Actions for this feature
-│       ├── api/          # Data fetching for this feature
-│       └── utils/        # Feature-specific utilities
-├── lib/                  # Global utility functions, API clients, and wrappers (e.g., `utils.ts` for clsx)
-├── types/                # Global TypeScript type declarations (only for truly global types)
+│       ├── actions/      # Next.js Server Actions (mutations & server logic)
+│       ├── api/          # Server-side data fetching functions / DB queries
+│       ├── data/         # Mock data & static feature constants
+│       ├── types/        # Feature-specific TypeScript interfaces/types
+│       └── utils/        # Feature helper utilities & Zod schemas
+├── lib/                  # Global utilities, API clients, DB config, and wrappers
+│   ├── db/               # Database client (Prisma / Supabase / Drizzle config)
+│   └── utils.ts          # Utility functions (e.g., `cn` for Tailwind class merging)
+├── types/                # Project-wide global TypeScript type definitions
 ├── hooks/                # Custom React hooks (strictly for client components)
-├── store/                # Global client state management (Zustand, Context, etc.)
-├── data/                 # Static data, constants, and mock data
-└── public/               # Static assets (images, fonts, icons)
+├── store/                # Global client state management (Zustand, Context)
+├── public/               # Static public assets (images, fonts, icons)
+├── AGENTS.md             # Expert AI agent roles & audit guidelines
+└── project-rules.md      # Core repository architecture rules & standards
 ```
 
-## 3. Component Architecture Rules
-- **Server vs. Client Components:**
-  - **Server by default.** Do not add `"use client"` unless specifically using `useState`, `useEffect`, `useContext`, standard DOM APIs (e.g., `window`), or onClick handlers.
-  - Push Client Components as far down the component tree as possible (leave parents as Server Components).
-- **Separation of Concerns:** Keep data fetching and business logic in Server Components, Server Actions, or dedicated service functions in `features/[feature]/api`. Pass simple, serializable data as props to Client Components.
-- **Prop Drilling:** Avoid prop drilling past 2 levels. Use server-side data fetching directly in the component that needs it, or use React context/Zustand for global client state.
-- **Max File Size Guidelines:** Component files must be concise. If a file exceeds 200 lines, extract logic into custom hooks or break the UI into smaller sub-components.
+---
 
-## 4. Naming Conventions
-- **Files and Folders:** ALWAYS use `kebab-case` (e.g., `user-profile.tsx`, `components/auth/`).
-- **Components:** ALWAYS use `PascalCase` for React component functions (e.g., `UserProfile`).
-- **Functions & Variables:** ALWAYS use `camelCase` for variable names, utility functions, and hooks (e.g., `formatDate`, `useWindowSize`).
-- **Types & Interfaces:** ALWAYS use `PascalCase` and descriptive names. **DO NOT** use an `I` prefix (e.g., `User` instead of `IUser`, `ButtonProps` instead of `TButtonProps`).
-- **Constants:** ALWAYS use `UPPER_SNAKE_CASE` for global, non-changing constants (e.g., `MAX_RETRY_COUNT`).
+## 3. Component Architecture & RSC Boundaries
+- **Server Component by Default:** Every component in `app/` and `features/` is a Server Component unless marked with `"use client"`.
+- **Push Interactivity to Leaves:** Keep top-level pages, layouts, and containers as Server Components. Extract interactive controls (buttons, forms, dropdowns) into isolated leaf Client Components.
+- **Separation of Concerns:** Keep server-side data fetching, authorization checks, and database queries in Server Components or dedicated `features/[feature]/api` service modules. Pass plain, serializable objects to Client Components.
+- **Avoid Deep Prop Drilling:** Do not drill props past 2 levels. Use direct server-side data fetching in Server Components or lightweight React Context / Zustand for global client state.
+- **File Size Guideline:** Keep component files concise (aim under 200 lines). Extract complex logic into custom hooks or break UI into smaller modular sub-components.
 
-## 5. Tailwind Styling Rules
-- **Utility-First:** Exclusively use Tailwind CSS v4 utility classes. **DO NOT** write custom CSS in `.css` files unless absolutely required for highly complex animations or root-level base styles.
-- **No Arbitrary Values:** **DO NOT** use Tailwind's arbitrary values (e.g., `w-[150px]`, `text-[#ff0000]`, `mt-[2rem]`). If a specific value is needed, it must be added to the design tokens via the `@theme` directive in `app/globals.css` and used as a named utility class (e.g., `w-card`, `text-primary`).
-- **V4 Configuration (CSS-in-CSS):** Tailwind v4 uses CSS for configuration. Do not use or create `tailwind.config.ts` or `tailwind.config.js`. Define all custom colors, fonts, and theme extensions using the `@theme` directive in `app/globals.css` (e.g., `--color-primary: #...;`). Include `@import "tailwindcss";` at the top of your main CSS file.
-- **Class Merging:** ALWAYS use a class merge utility (`cn` combining `clsx` and `tailwind-merge`) for dynamic class names to avoid specificity clashing.
+---
+
+## 4. Fullstack Data Flow & Server Actions
+- **Mutations via Server Actions:** Execute all data mutations (form submissions, status updates, user actions) using Next.js Server Actions placed in `features/[feature]/actions/`.
+- **Input Validation:** Validate all action inputs server-side using Zod schemas before processing.
+- **Standardized Action Responses:** Server Actions must return a consistent, type-safe response pattern:
   ```typescript
-  // Example utility implementation expectation
-  import { clsx, type ClassValue } from "clsx"
-  import { twMerge } from "tailwind-merge"
-  export function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)) }
+  export type ActionResponse<T = unknown> = 
+    | { success: true; data: T; message?: string }
+    | { success: false; error: string; errors?: Record<string, string[]> };
   ```
-- **Inline Styles:** **DO NOT** mix Tailwind classes with inline `style={{}}` objects, except for highly dynamic values (e.g., calculated transform offsets).
-- **Responsiveness:** Build mobile-first. Establish base styles for mobile, then apply standard breakpoints (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`).
+- **Cache Revalidation:** Call `revalidatePath()` or `revalidateTag()` inside Server Actions after successful mutations to ensure UI freshness without manual browser reloads.
 
-## 6. TypeScript Rules
-- **Strict Mode:** `tsconfig.json` strict mode must be enabled and fully respected.
-- **No `any`:** Explicitly type all variables, function parameters, state, and return types. Expanding types with `any` is a terminable offense for AI generation. Use `unknown` if truly dynamic, then narrow.
-- **Interfaces vs Types:** Use `type` for standard unions, intersections, and mapped types. Use `interface` primarily for defining object shapes or class implementations that will be extended. For component props, `type Props = {}` or `interface Props {}` are both acceptable, but be internally consistent per file.
-- **Co-location:** Keep component prop types in the identical file as the component if they are completely coupled. Only move to `types/` if structurally shared.
+---
 
-## 7. Data Organization Rules
-- **Server Actions:** Use Next.js Server Actions for all mutations. Place them in `features/[name]/actions.ts`.
-- **Data Fetching:** Fetch data exclusively server-side in Server Components, Layouts, or Route Handlers via standard standard Node.js `fetch`.
-- **Constants & Mock Data:** Store static/mock data in the `data/` directory or `features/[name]/constants.ts`. Do not clutter component files with giant static arrays.
-- **Environment Variables:** Validate environment variables early. Never expose private keys to the client. Prepend `NEXT_PUBLIC_` only when the variable is legally allowed in the browser bundle.
+## 5. Database & API Layer Architecture
+- **Type-Safe Entities:** Define explicit TypeScript interfaces/types for database entities (`User`, `Course`, `Question`, `Enrollment`).
+- **Database Abstraction:** Isolate direct database queries inside `lib/db/` or `features/[feature]/api/`. Never write raw database queries directly inside React components.
+- **Route Handlers:** Use Next.js Route Handlers (`app/api/[route]/route.ts`) for external API integrations, webhooks, or public REST endpoints. Always handle errors with proper HTTP status codes (`200`, `400`, `401`, `403`, `500`).
+- **Security & Authorization:** Enforce authentication and role checks on the server side (in Server Actions and Route Handlers) before returning or mutating database records.
 
-## 8. Accessibility Requirements
-- **Semantic HTML:** Do not use `<div>` for everything. Use proper HTML5 semantic tags (`<nav>`, `<header>`, `<main>`, `<article>`, `<section>`, `<aside>`, `<button>`).
-- **Aria Attributes:** Implement standard ARIA roles, `aria-label`, `aria-describedby`, and `aria-hidden` strictly where native HTML semantic elements fall short.
-- **Keyboard Navigation:** Forms and interactive components MUST be fully usable via `Tab`, `Enter`, and `Space`. Add `tabIndex={0}` only to non-native interactive elements.
-- **Image Alts:** Every `<Image>` component MUST have a descriptive `alt` attribute. Use `alt=""` explicitly for purely decorative images.
+---
 
-## 9. Performance Best Practices
-- **Image Optimization:** ALWAYS use the `next/image` component for images. Provide explicit `width` and `height` (or use `fill`) to prevent Cumulative Layout Shift (CLS).
-- **Client Bundles:** Minimize the size of client boundaries. Import large external client-side libraries dynamically using `next/dynamic` to split the bundle.
-- **Caching Validation:** Heavily leverage Next.js App Router caching. Prefer explicit `revalidate` tags or times for static/semi-static fetches.
+## 6. Tailwind CSS v4 Styling Rules
+- **Utility-First:** Exclusively use Tailwind CSS v4 utility classes. **DO NOT** write custom `.css` rules unless required for root `@theme` definitions or complex animations.
+- **Tailwind v4 Configuration (`@theme`):** Tailwind v4 uses CSS for configuration. Do not create `tailwind.config.ts`. Define design tokens, colors, fonts, and breakpoints via the `@theme` directive in `app/globals.css`.
+- **Class Merging with `cn`:** Always use the class merging utility (`cn` combining `clsx` and `tailwind-merge`) when defining dynamic or configurable class names:
+  ```typescript
+  import { clsx, type ClassValue } from "clsx";
+  import { twMerge } from "tailwind-merge";
 
-## 10. Git Commit Conventions
-- **Format:** Strongly enforce Conventional Commits: `type(scope): subject`.
-- **Types:** `feat` (new feature), `fix` (bug fix), `docs` (documentation), `style` (formatting), `refactor` (restructuring without feature change), `test` (tests), `chore` (maintenance, deps).
-- **Subject:** Imperative mood ("add auth" not "added auth"), lowercase, no period at end.
+  export function cn(...inputs: ClassValue[]) {
+      return twMerge(clsx(inputs));
+  }
+  ```
+- **Non-Collapsing Layout Spacing:** Use section padding (`pt-*`, `pb-*`, `py-*`) rather than un-responsive outer top/bottom margins (`mt-*`, `mb-*`) on section tags to prevent CSS margin collapsing across viewports.
+- **Responsive Design:** Build mobile-first. Establish base styles for mobile viewports, then layer responsive breakpoints (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`).
 
-## 11. Code Quality Standards
-- **DRY (Don't Repeat Yourself):** Consolidate repeating logic into utility functions or custom hooks immediately upon noticing duplication.
-- **KISS (Keep It Simple, Stupid):** Avoid over-engineering. Write the simplest possible function that solves the problem robustly. Do not pre-optimize for use cases that do not exist yet.
-- **Early Returns:** Use early returns to prevent deep nesting and improve readability (Guard Clauses).
-- **Linting:** Resolve all ESLint and TypeScript compiler errors dynamically. Ignoring rules via `// @ts-ignore` or `// eslint-disable-next-line` requires extremely sound justification documented in a comment above the line.
+---
 
-## 12. Refactoring Guidelines
-- **No Functional Changes:** When refactoring for structure or performance, the application's observable output must remain mathematically identical.
-- **Incremental Verification:** Refactor incrementally in extremely small steps. Verify rendering and behavior after each atomic change.
-- **Dead Code Detection:** If you replace a component, hunt down and rigorously delete the old component and any of its orphaned dependencies.
+## 7. Naming Conventions & TypeScript Rules
+- **File & Folder Names:** ALWAYS use `kebab-case` (e.g., `course-card.tsx`, `features/video-materials/`).
+- **React Components:** ALWAYS use `PascalCase` (e.g., `CourseCard`).
+- **Variables & Functions:** ALWAYS use `camelCase` (e.g., `formatCurrency`, `getCourseBySlug`).
+- **Types & Interfaces:** ALWAYS use `PascalCase` without `I` or `T` prefixes (e.g., `User`, `CourseProps` instead of `IUser` or `TCourseProps`).
+- **Constants:** ALWAYS use `UPPER_SNAKE_CASE` for non-changing static values (e.g., `DEFAULT_PAGE_SIZE`).
+- **Strict TypeScript:** Keep `strict: true` in `tsconfig.json`. Explicitly type function parameters, return types, and state. Use `unknown` with type narrowing instead of `any`.
 
-## 13. AI Code Generation Rules (Strict AI Instructions)
-- **Absolute Adherence:** The AI must read and internalize this file before every major refactor or feature generation.
-- **No Hallucinated Dependencies:** The AI must **ONLY** use dependencies physically present in `package.json`. If a required dependency is missing, the AI MUST request permission from the user to install it.
-- **Complete Solutions Without Placeholders:** The AI MUST output fully implemented code. Using lazy placeholder comments like `// implement logic here`, `// ... rest of the code`, or `// add error handling` is strictly prohibited. Output the full functional file.
-- **Context Awareness:** The AI must proactively use tools (`grep_search`, `view_file`) to understand the surrounding project context, matching existing code styles, identifying shared utility wrappers (e.g., checking if `lib/utils` exports `cn`), and leveraging already existing UI components before generating new ones from scratch.
+---
+
+## 8. SEO & Metadata Best Practices
+- **Dynamic Metadata:** Export `metadata` objects or implement `generateMetadata()` on all dynamic pages (`/courses/[slug]`, `/kmf-questions/[slug]`).
+- **Semantic Headings:** Maintain proper heading hierarchy (exactly one `<h1>` per page, followed by logical `<h2>`, `<h3>`).
+- **Structured Data:** Include JSON-LD schemas (`EducationalOrganization`, `Course`, `BreadcrumbList`) for search engine indexing.
+- **Robots & Sitemap:** Maintain dynamic `app/sitemap.ts` and `app/robots.ts`.
+
+---
+
+## 9. Accessibility Requirements (WCAG 2.2 AA)
+- **Semantic HTML5:** Use proper semantic elements (`<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer`, `<button>`). Do not wrap everything in generic `<div>` tags.
+- **ARIA & Labels:** Implement `aria-label`, `aria-expanded`, `aria-controls`, and `aria-hidden` where standard HTML fall short.
+- **Keyboard Navigation:** Ensure interactive elements (modals, dropdowns, forms) support full keyboard navigation (`Tab`, `Enter`, `Space`, `Escape`) with visible focus rings (`focus-visible:outline-2`).
+- **Image Alts:** Every `<Image>` component MUST have a descriptive `alt` string (or `alt=""` for purely decorative graphics).
+
+---
+
+## 10. Performance Best Practices & Core Web Vitals
+- **Image Optimization:** Always use `next/image` with explicit `width`/`height` or `fill` to prevent Cumulative Layout Shift (CLS).
+- **Font Optimization:** Use `next/font/google` with `display: "swap"` to prevent flash of unstyled text (FOUT).
+- **Bundle Optimization:** Dynamically import heavy client component boundaries or libraries using `next/dynamic` (e.g., carousels, charts, modal overlays).
+
+---
+
+## 11. Git Commit Conventions
+Follow Conventional Commits format: `type(scope): subject`
+- **Types:** `feat` (new feature), `fix` (bug fix), `docs` (documentation), `style` (formatting), `refactor` (code restructuring), `test` (adding tests), `chore` (deps/build update).
+- **Example:** `feat(courses): add server action for user course enrollment`
+
+---
+
+## 12. Code Quality & Refactoring Standards
+- **DRY & KISS:** Consolidate repeated logic into reusable utility functions or custom hooks. Keep code straightforward and avoid over-engineering.
+- **Guard Clauses:** Prefer early returns over deeply nested `if/else` conditionals.
+- **Dead Code Cleanup:** When replacing or updating components, hunt down and delete unused imports, files, and orphaned functions immediately.
+
+---
+
+## 13. AI Code Generation Rules (Strict Instructions)
+- **Read Guidelines First:** Internalize `AGENTS.md` and `project-rules.md` before generating code or modifying features.
+- **No Hallucinated Packages:** Use ONLY dependencies listed in `package.json`. If a new dependency is required, request permission from the user first.
+- **Complete Code Output:** Never output incomplete snippets with placeholders like `// implement logic here`. Always return full, functional, copy-paste-ready code.
+- **Context Inspection:** Use search tools (`grep_search`, `view_file`) to check existing utility functions (e.g., `cn`), existing component patterns, and type definitions before creating duplicates.

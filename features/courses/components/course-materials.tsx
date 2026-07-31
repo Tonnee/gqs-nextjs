@@ -31,10 +31,15 @@ const MATERIALS = [
 
 interface CourseMaterialsProps {
     materials?: string;
+    showBooks?: boolean;
+    books?: Array<{ src: string; alt: string; title?: string }>;
 }
 
-export default function CourseMaterials({ materials }: CourseMaterialsProps) {
-    if (!materials) return null;
+export default function CourseMaterials({ materials, showBooks = true, books }: CourseMaterialsProps) {
+    if (showBooks === false) return null;
+    if (!materials && (!books || books.length === 0)) return null;
+
+    const displayMaterials = books && books.length > 0 ? books : MATERIALS;
 
     return (
         <section className="bg-white py-16 md:py-36">
@@ -47,7 +52,7 @@ export default function CourseMaterials({ materials }: CourseMaterialsProps) {
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-9 items-center justify-items-center">
-                    {MATERIALS.map((material, index) => (
+                    {displayMaterials.map((material, index) => (
                         <div
                             key={index}
                             className="w-full max-w-[280px] md:max-w-none flex justify-center"

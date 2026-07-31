@@ -4,14 +4,7 @@ export interface Announcement {
     linkUrl?: string;
 }
 
-export const defaultLeft: Announcement = {
-    text: "New Batch - Beat GRE Quant in 2 Months",
-    date: "24 December",
-    linkUrl: "/",
-};
-
-export const defaultRight: Announcement = {
-    text: "New Batch - Beat KMF's 1147 Quant Questions",
-    date: "23 December",
-    linkUrl: "/",
-};
+export interface AnnouncementsData {
+    left: Announcement;
+    right: Announcement;
+}

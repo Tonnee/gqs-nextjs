@@ -5,10 +5,15 @@ import IconText from "@/components/ui/icon-text";
 import { MdCall } from "react-icons/md";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import { RiMailSendFill } from "react-icons/ri";
+import { cn } from "@/lib/utils";
 
-export default function Contact() {
+interface ContactProps {
+    className?: string;
+}
+
+export default function Contact({ className }: ContactProps = {}) {
     return (
-        <section className="mt-48 mb-44">
+        <section className={cn("pt-20 md:pt-32 lg:pt-48 pb-16 md:pb-28 lg:pb-44", className)}>
             <Container>
                 <SectionHeading
                     level={6}

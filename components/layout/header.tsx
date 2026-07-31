@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
-import { Announcement, defaultLeft, defaultRight } from "@/features/home/data/announcements";
+import { Announcement } from "@/features/home/data/announcements";
+import { getAnnouncementsServer } from "@/features/home/data/announcements-server";
 import { cn } from "@/lib/utils";
 
 export interface HeaderProps {
@@ -38,9 +39,17 @@ function AnnouncementMessage({
 }
 
 export function Header({
-    leftAnnouncement = defaultLeft,
-    rightAnnouncement = defaultRight,
+    leftAnnouncement,
+    rightAnnouncement,
 }: HeaderProps) {
+    const dynamicData = getAnnouncementsServer();
+    const left = leftAnnouncement || dynamicData?.left;
+    const right = rightAnnouncement || dynamicData?.right;
+
+    if (!left && !right) {
+        return null;
+    }
+
     return (
         <header 
             className="flex min-h-18 w-full items-center bg-primary py-3 md:py-0"
@@ -50,14 +59,14 @@ export function Header({
             <Container>
                 <div className="flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
                     <div className="flex-1 w-full">
-                        {leftAnnouncement && (
-                            <AnnouncementMessage announcement={leftAnnouncement} />
+                        {left && (
+                            <AnnouncementMessage announcement={left} />
                         )}
                     </div>
                     <div className="flex-1 w-full">
-                        {rightAnnouncement && (
+                        {right && (
                             <AnnouncementMessage 
-                                announcement={rightAnnouncement} 
+                                announcement={right} 
                                 alignRight 
                             />
                         )}
