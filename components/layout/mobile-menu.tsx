@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { CtaButton } from "@/components/layout/cta-button";
-import { NAV_LINKS, KMF_LINKS } from "@/features/home/data/navigation";
+import { NAV_LINKS, KMF_LINKS, VIDEO_MATERIALS_LINKS } from "@/features/home/data/navigation";
 import { courseData } from "@/features/home/data/course-data";
 
 interface MobileMenuProps {
@@ -25,9 +25,13 @@ export function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
                     <ul className="space-y-1 px-4 pb-6 pt-2">
                         {NAV_LINKS.map((link) => {
                             const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
+                            const hasDropdown = link.name === "Courses" || link.name === "KMF Questions" || link.name === "Video Materials";
                             
-                            if (link.name === "Courses" || link.name === "KMF Questions") {
+                            if (hasDropdown) {
                                 const isCourses = link.name === "Courses";
+                                const isKmf = link.name === "KMF Questions";
+                                const isVideoMaterials = link.name === "Video Materials";
+
                                 return (
                                     <li key={link.name}>
                                         <div className="flex flex-col">
@@ -44,7 +48,7 @@ export function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
                                                 <MdKeyboardArrowDown className="text-xl" />
                                             </Link>
                                             <div className="pl-6 pr-3 py-2 flex flex-col space-y-3 mb-2 mt-1">
-                                                {isCourses ? (
+                                                {isCourses &&
                                                     courseData.map((course) => (
                                                         <Link 
                                                             key={course.slug} 
@@ -56,7 +60,8 @@ export function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
                                                             <span className="text-xs text-foreground-muted">{course.startDate} • {course.time}</span>
                                                         </Link>
                                                     ))
-                                                ) : (
+                                                }
+                                                {isKmf &&
                                                     KMF_LINKS.map((kmf) => (
                                                         <Link 
                                                             key={kmf.href} 
@@ -65,9 +70,23 @@ export function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
                                                             onClick={onClose}
                                                         >
                                                             <span className="text-sm font-semibold text-primary">{kmf.name}</span>
+                                                            <span className="text-xs text-foreground-muted">{kmf.questionCount} • {kmf.level}</span>
                                                         </Link>
                                                     ))
-                                                )}
+                                                }
+                                                {isVideoMaterials &&
+                                                    VIDEO_MATERIALS_LINKS.map((item) => (
+                                                        <Link 
+                                                            key={item.href} 
+                                                            href={item.href} 
+                                                            className="flex flex-col space-y-1 bg-gray-50/50 p-2 rounded-md hover:bg-gray-100 transition-colors"
+                                                            onClick={onClose}
+                                                        >
+                                                            <span className="text-sm font-semibold text-primary">{item.name}</span>
+                                                            <span className="text-xs text-foreground-muted">{item.duration} • {item.category}</span>
+                                                        </Link>
+                                                    ))
+                                                }
                                             </div>
                                         </div>
                                     </li>

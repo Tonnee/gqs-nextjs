@@ -19,7 +19,7 @@ interface QuestionCardProps {
     onTimeUpdate: (time: number) => void;
 }
 
-export default function QuestionCard({ 
+export default function QuestionCard({
     question,
     elapsedTime,
     isActive,
@@ -37,7 +37,7 @@ export default function QuestionCard({
         const observer = new IntersectionObserver(([entry]) => {
             setIntersecting(entry.isIntersecting);
         }, { threshold: 0.1 });
-        
+
         if (cardRef.current) observer.observe(cardRef.current);
         return () => observer.disconnect();
     }, []);
@@ -79,17 +79,17 @@ export default function QuestionCard({
     return (
         <div ref={cardRef} className="bg-white p-6 md:p-8 mb-32">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                
+
                 {/* First 3 columns: Question info & Stopwatch */}
                 <div className="col-span-1 md:col-span-2 h-full pt-2">
-                    
+
                     <div className="flex flex-col mb-8">
                         <h3 className="text-[24px] font-poppins font-normal text-primary-deep mb-6">
                             Question {question.id}
                         </h3>
-                        
+
                         <div>
-                            <DualText lightText="Difficulty Level: " boldText="3" fontClass="text-base" distanceBottom="mb-2" />
+                            <DualText lightText="Difficulty Level: " boldText={question.difficulty || "3"} fontClass="text-base" distanceBottom="mb-2" />
                             <DualText lightText="Standard Time: " boldText={question.timeExpected || "40 Sec"} fontClass="text-base" distanceBottom="mb-0" />
                         </div>
                     </div>
@@ -101,7 +101,7 @@ export default function QuestionCard({
                                 {timeText}
                             </span>
                         </div>
-                        
+
                         <div className="flex items-center gap-3">
                             {isActive ? (
                                 <FaPause className="text-primary hover:text-accent cursor-pointer text-[22px] transition-colors" onClick={() => onPause()} />
@@ -127,25 +127,26 @@ export default function QuestionCard({
                 </div>
 
                 {/* Last 3 columns: Video & Answer */}
-                <div className="col-span-1 md:col-span-3 flex flex-row items-start justify-start h-full gap-4">
-                    <Link 
-                        href={question.videoLink}
-                        target="_blank"
-                        className="flex items-center font-poppins text-foreground-heading hover:text-accent transition-colors font-medium text-lg whitespace-nowrap mt-3"
-                    >
-                        <svg className="w-8 h-8 mr-3 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                        </svg>
-                        Video Explanation
-                    </Link>
+                <div className="col-span-1 md:col-span-3 flex flex-row items-start justify-end h-full gap-4">
+                    {question.videoLink && (
+                        <Link
+                            href={question.videoLink}
+                            target="_blank"
+                            className="flex items-center font-poppins text-foreground-heading hover:text-accent transition-colors font-medium text-lg whitespace-nowrap mt-3"
+                        >
+                            <svg className="w-8 h-8 mr-3 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                            </svg>
+                            Video Explanation
+                        </Link>
+                    )}
 
                     <button
-                        onClick={() => setShowAnswer(true)}
-                        className={`py-3.5 px-6 rounded-full font-poppins font-semibold text-base transition-all duration-300 whitespace-nowrap shrink-0 ${
-                            showAnswer 
-                            ? "bg-primary-soft text-white border-2 border-transparent shadow-inner" 
+                        onClick={() => setShowAnswer(prev => !prev)}
+                        className={`py-3.5 px-6 rounded-full font-poppins font-semibold text-base transition-all duration-300 whitespace-nowrap shrink-0 cursor-pointer ${showAnswer
+                            ? "bg-primary-soft text-white border-2 border-transparent shadow-inner"
                             : "bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white"
-                        }`}
+                            }`}
                     >
                         {showAnswer ? `Answer: ${question.answer}` : "Answer"}
                     </button>

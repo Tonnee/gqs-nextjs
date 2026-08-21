@@ -1,23 +1,34 @@
 import type { Metadata } from "next";
+import VideoMaterialsHero from "@/features/video-materials/components/video-materials-hero";
+import AwaPrepContent from "@/features/awa-prep/components/awa-prep-content";
+import UpcomingCourses from "@/features/home/components/upcoming-courses";
+import VisitSocial from "@/features/home/components/visit-social";
+import Contact from "@/features/home/components/contact";
 
 export const metadata: Metadata = {
-    title: "AWA Prep | GRE Quant School",
-    description: "Analytical Writing Assessment tips and essay grading guidelines.",
+    title: "GRE AWA Preparation | 110 Issue Prompts & Sample Essays | GRE Quant School",
+    description: "Prepare for GRE Analytical Writing: official Pool of Issue Topics, ETS scoring guidelines, GregMat essay strategy videos, and 110 sample model essays.",
+    openGraph: {
+        title: "GRE AWA Preparation & 110 Model Essays | GRE Quant School",
+        description: "Official pool of issue topics, essay templates, walkthrough videos, and comprehensive sample answers.",
+        images: ["/images/student-banner.jpg"],
+    },
 };
 
 export default function AwaPrepPage() {
     return (
-        <main className="flex min-h-screen flex-col items-center px-4 py-24 sm:px-6 lg:px-8">
-            <section className="mx-auto w-full max-w-7xl">
-                <header className="mb-12">
-                    <h1 className="font-poppins text-4xl font-bold tracking-tight text-primary-deep sm:text-5xl">
-                        AWA Preparation
-                    </h1>
-                </header>
-                <div className="font-raleway text-base text-neutral-600 leading-relaxed">
-                    <p>Learn how to properly structure your Analytical Writing Assessment essays to score 5.0+ with ease.</p>
-                </div>
-            </section>
+        <main className="flex min-h-screen flex-col bg-white">
+            <VideoMaterialsHero
+                badge="Writing Preparation Guide"
+                title="GRE Analytical Writing (AWA)"
+                description="Master the GRE Issue Task with official ETS prompt pools, scoring criteria guidelines, GregMat video walkthrough templates, and 110 sample model essays analyzed by experts."
+                imageSrc="/images/student-banner.jpg"
+                imageAlt="GRE Analytical Writing Preparation"
+            />
+            <AwaPrepContent />
+            <UpcomingCourses />
+            <VisitSocial />
+            <Contact />
         </main>
     );
 }

@@ -5,7 +5,7 @@ import { ReactNode, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface CtaButtonProps {
-    href: string;
+    href?: string;
     children: ReactNode;
     className?: string;
     onClick?: () => void;
@@ -14,6 +14,8 @@ interface CtaButtonProps {
     textColorClass?: string;
     download?: boolean;
     target?: string;
+    rel?: string;
+    type?: "button" | "submit" | "reset";
 }
 
 export function CtaButton({ 
@@ -25,41 +27,30 @@ export function CtaButton({
     hoverColorClass = "bg-primary",
     textColorClass = "text-white hover:text-white",
     download = false,
-    target
+    target,
+    rel,
+    type = "button",
 }: CtaButtonProps) {
-    const buttonRef = useRef<HTMLAnchorElement>(null);
+    const buttonRef = useRef<HTMLElement>(null);
     const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
 
-    const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
         if (!buttonRef.current) return;
         const rect = buttonRef.current.getBoundingClientRect();
         setHoverPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
         setIsHovered(true);
     };
 
-    const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
         if (!buttonRef.current) return;
         const rect = buttonRef.current.getBoundingClientRect();
         setHoverPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
         setIsHovered(false);
     };
 
-    return (
-        <Link
-            ref={buttonRef}
-            href={href}
-            onClick={onClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            target={target}
-            className={cn(
-                "group relative overflow-hidden rounded-full font-normal shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent inline-block text-center transition-colors duration-500 ease-out",
-                baseColorClass,
-                textColorClass,
-                className
-            )}
-        >
+    const content = (
+        <>
             <span
                 className={cn(
                     "pointer-events-none absolute z-0 rounded-full transition-transform duration-500 ease-out",
@@ -73,9 +64,47 @@ export function CtaButton({
                     transform: isHovered ? "translate(-50%, -50%) scale(500)" : "translate(-50%, -50%) scale(0)",
                 }}
             />
-            <span className="relative z-10">
+            <span className="relative z-10 inline-flex items-center justify-center gap-2">
                 {children}
             </span>
-        </Link>
+        </>
+    );
+
+    const commonClasses = cn(
+        "group relative overflow-hidden rounded-full font-normal shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent inline-flex items-center justify-center text-center transition-colors duration-500 ease-out cursor-pointer",
+        baseColorClass,
+        textColorClass,
+        className
+    );
+
+    if (href) {
+        return (
+            <Link
+                ref={buttonRef as unknown as React.RefObject<HTMLAnchorElement>}
+                href={href}
+                onClick={onClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                target={target}
+                rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)}
+                className={commonClasses}
+            >
+                {content}
+            </Link>
+        );
+    }
+
+    return (
+        <button
+            ref={buttonRef as unknown as React.RefObject<HTMLButtonElement>}
+            type={type}
+            onClick={onClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className={commonClasses}
+        >
+            {content}
+        </button>
     );
 }
+

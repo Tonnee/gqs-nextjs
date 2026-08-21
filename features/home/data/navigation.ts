@@ -22,10 +22,72 @@ export const NAV_LINKS: NavLink[] = [
     { name: "Contact", href: "/contact" },
 ];
 
-export const KMF_LINKS: NavLink[] = [
-    { name: "KMF latest 1794", href: "/kmf-questions/kmf-latest-1794" },
-    { name: "KMF 1147", href: "/kmf-questions/kmf-1147" },
-    { name: "KMF Verbal", href: "/kmf-questions/kmf-verbal" },
+export interface KmfLinkItem extends NavLink {
+    level: string;
+    questionCount: string;
+    format: string;
+    type: string;
+}
+
+export const KMF_LINKS: KmfLinkItem[] = [
+    {
+        name: "KMF latest 1794",
+        href: "/kmf-questions/kmf-latest-1794",
+        level: "GRE Quant Bank",
+        questionCount: "1,794 Questions",
+        format: "Answers & Solutions",
+        type: "Topic-wise Practice",
+    },
+    {
+        name: "KMF 1147",
+        href: "/kmf-questions/kmf-1147",
+        level: "Classic Quant Bank",
+        questionCount: "1,147 Questions",
+        format: "Answers & Solutions",
+        type: "High-Frequency GRE",
+    },
+    {
+        name: "KMF Verbal",
+        href: "/kmf-questions/kmf-verbal",
+        level: "Verbal Reasoning",
+        questionCount: "102+ Questions",
+        format: "Reading & Logic",
+        type: "Full Explanations",
+    },
+];
+
+export interface VideoMaterialLinkItem extends NavLink {
+    category: string;
+    description: string;
+    duration: string;
+    level: string;
+}
+
+export const VIDEO_MATERIALS_LINKS: VideoMaterialLinkItem[] = [
+    {
+        name: "Must Know Strategies",
+        href: "/video-materials/must-know-strategies",
+        category: "GRE Strategies",
+        description: "Traps, silly mistakes & test day strategies",
+        duration: "5 Key Lessons",
+        level: "All Quant Topics",
+    },
+    {
+        name: "Basics Sessions",
+        href: "/video-materials/basics-sessions",
+        category: "Foundation",
+        description: "Concept reviews & formula walkthroughs",
+        duration: "7 Core Modules",
+        level: "Concept Mastery",
+    },
+    {
+        name: "Confusing Topics",
+        href: "/video-materials/confusing-topics",
+        category: "Deep Dives",
+        description: "Lines equations, interest & Venn diagrams",
+        duration: "5 Deep Dives",
+        level: "Advanced 165+ Prep",
+    },
 ];
 
 export const FOOTER_LINKS: FooterLinkSection[] = [

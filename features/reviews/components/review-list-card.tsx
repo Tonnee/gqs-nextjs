@@ -1,53 +1,62 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import { FaStar } from "react-icons/fa";
 import { ReviewData } from "../data/reviews-list-data";
 
 interface ReviewListCardProps {
     review: ReviewData;
 }
 
+const DEFAULT_MALE_AVATAR = "/images/reviews/all/default-male-avatar.png";
+
 export default function ReviewListCard({ review }: ReviewListCardProps) {
+    const [imgSrc, setImgSrc] = useState(review.imageSrc || DEFAULT_MALE_AVATAR);
+
     return (
-        <div className="w-full bg-background-subtle rounded-xl p-8 mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                {/* Left side: 3 columns */}
-                <div className="col-span-1 md:col-span-3 flex flex-col items-center justify-center text-center">
-                    <div className="relative w-24 h-24 mb-4 rounded-full border-4 border-white overflow-hidden bg-white">
-                        <Image
-                            src={review.imageSrc}
-                            alt={review.name}
-                            fill
-                            className="object-cover"
-                            sizes="96px"
-                        />
-                    </div>
-                    <h4 className="font-poppins font-bold text-lg text-primary-deep mb-1">
-                        {review.name}
-                    </h4>
-                    {(review.profession || review.batch) && (
-                        <p className="font-raleway text-sm text-foreground-muted">
-                            {review.profession && review.batch 
-                                ? `${review.profession}, Student of ${review.batch}`
-                                : review.profession 
-                                    ? review.profession 
-                                    : `Student of ${review.batch}`
-                            }
-                        </p>
-                    )}
+        <article className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-auto border border-gray-100/90">
+            <div>
+                {/* 1. Rating Stars at Top */}
+                <div className="flex items-center gap-1.5 text-accent text-sm sm:text-base mb-4" aria-label="5 out of 5 stars">
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
                 </div>
 
-                {/* Offset: 1 column empty - hidden on small screens */}
-                <div className="hidden md:block md:col-span-1"></div>
+                {/* 2. Review Content */}
+                <p className="font-poppins text-sm md:text-[15px] text-foreground-heading/85 leading-relaxed mb-5 italic">
+                    &ldquo;{review.review}&rdquo;
+                </p>
+            </div>
 
-                {/* Right side: 8 columns */}
-                <div className="col-span-1 md:col-span-8 flex flex-col justify-center">
-                    <h3 className="font-poppins font-bold text-xl text-accent mb-4">
-                        {review.tagline}
+            {/* 3. Student Profile at Bottom */}
+            <div className="flex items-center gap-3.5 pt-4 border-t border-gray-100/80 mt-auto">
+                <div className="relative w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-accent/20 overflow-hidden bg-background-subtle shrink-0 shadow-xs">
+                    <Image
+                        src={imgSrc}
+                        alt={review.name}
+                        fill
+                        className="object-cover"
+                        sizes="48px"
+                        onError={() => setImgSrc(DEFAULT_MALE_AVATAR)}
+                    />
+                </div>
+                <div className="min-w-0 flex-1">
+                    <h3 className="font-raleway font-bold text-base text-foreground-heading leading-tight truncate">
+                        {review.name}
                     </h3>
-                    <p className="font-raleway text-base text-foreground-muted leading-relaxed">
-                        {review.review}
+                    <p className="font-poppins text-xs text-foreground-muted mt-0.5 truncate">
+                        {review.profession || "Student of GRE Quant School"}
                     </p>
                 </div>
             </div>
-        </div>
+        </article>
     );
 }
+
+
+
+

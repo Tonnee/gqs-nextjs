@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Container } from "@/components/layout/container";
 import { CtaButton } from "@/components/layout/cta-button";
-import { NAV_LINKS, KMF_LINKS } from "@/features/home/data/navigation";
+import { NAV_LINKS, KMF_LINKS, VIDEO_MATERIALS_LINKS } from "@/features/home/data/navigation";
 import { courseData } from "@/features/home/data/course-data";
 import { cn } from "@/lib/utils";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -47,9 +47,13 @@ export function Navbar() {
                         <ul className="flex items-center justify-center space-x-8 xl:space-x-16">
                             {NAV_LINKS.map((link) => {
                                 const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
+                                const hasDropdown = link.name === "Courses" || link.name === "KMF Questions" || link.name === "Video Materials";
                                 
-                                if (link.name === "Courses" || link.name === "KMF Questions") {
+                                if (hasDropdown) {
                                     const isCourses = link.name === "Courses";
+                                    const isKmf = link.name === "KMF Questions";
+                                    const isVideoMaterials = link.name === "Video Materials";
+
                                     return (
                                         <li key={link.name} className="group flex items-center h-20">
                                             <Link
@@ -66,7 +70,7 @@ export function Navbar() {
 
                                             <div className="absolute top-[80px] left-0 w-full bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out cursor-default border-t border-gray-100">
                                                 <Container>
-                                                    {isCourses ? (
+                                                    {isCourses && (
                                                         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-20 py-14">
                                                             {courseData.map((course) => (
                                                                 <div key={course.slug} className="flex flex-col space-y-2 group/course">
@@ -91,16 +95,59 @@ export function Navbar() {
                                                                 />
                                                             </div>
                                                         </div>
-                                                    ) : (
-                                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-10">
+                                                    )}
+
+                                                    {isKmf && (
+                                                        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-20 py-14">
                                                             {KMF_LINKS.map((kmf) => (
-                                                                <Link key={kmf.href} href={kmf.href} className="flex flex-col space-y-2 group/kmf p-6 rounded-xl hover:bg-background-subtle transition-colors">
-                                                                    <span className="text-foreground-heading text-2xl font-semibold group-hover/kmf:text-accent transition-colors">
+                                                                <div key={kmf.href} className="flex flex-col space-y-2 group/kmf">
+                                                                    <p className="text-accent text-sm font-semibold uppercase tracking-wider mb-4">{kmf.level}</p>
+                                                                    <Link href={kmf.href} className="text-foreground-heading text-3xl leading-tight font-semibold group-hover/kmf:text-accent transition-colors">
                                                                         {kmf.name}
-                                                                    </span>
-                                                                    <span className="text-sm text-foreground-muted">Practice the best GRE questions from our updated bank.</span>
-                                                                </Link>
+                                                                    </Link>
+                                                                    <div className="flex flex-col mt-10">
+                                                                        <DualText lightText="Questions:" boldText={kmf.questionCount} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
+                                                                        <DualText lightText="Format:" boldText={kmf.format} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
+                                                                        <DualText lightText="Type:" boldText={kmf.type} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-0" fontClass="text-sm" />
+                                                                    </div>
+                                                                </div>
                                                             ))}
+                                                            {/* 4th Column Image displays only for xl screens */}
+                                                            <div className="hidden xl:block relative w-full h-[350px] rounded-lg overflow-hidden shadow-sm">
+                                                                <Image
+                                                                    src="/images/student-banner.jpg"
+                                                                    alt="Student preparing for GRE questions"
+                                                                    fill
+                                                                    className="object-cover transition-transform hover:scale-105 duration-500"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {isVideoMaterials && (
+                                                        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-20 py-14">
+                                                            {VIDEO_MATERIALS_LINKS.map((item) => (
+                                                                <div key={item.href} className="flex flex-col space-y-2 group/video">
+                                                                    <p className="text-accent text-sm font-semibold uppercase tracking-wider mb-4">{item.category}</p>
+                                                                    <Link href={item.href} className="text-foreground-heading text-3xl leading-tight font-semibold group-hover/video:text-accent transition-colors">
+                                                                        {item.name}
+                                                                    </Link>
+                                                                    <div className="flex flex-col mt-10">
+                                                                        <DualText lightText="Lessons:" boldText={item.duration} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
+                                                                        <DualText lightText="Focus:" boldText={item.level} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-4" fontClass="text-sm" />
+                                                                        <DualText lightText="Content:" boldText={item.description} lightColor="text-foreground-muted" boldColor="text-primary" distanceBottom="mb-0" fontClass="text-sm" />
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                            {/* 4th Column Image displays only for xl screens */}
+                                                            <div className="hidden xl:block relative w-full h-[350px] rounded-lg overflow-hidden shadow-sm">
+                                                                <Image
+                                                                    src="/images/video-materials-banner.png"
+                                                                    alt="GRE Quant Video Materials"
+                                                                    fill
+                                                                    className="object-cover transition-transform hover:scale-105 duration-500"
+                                                                />
+                                                            </div>
                                                         </div>
                                                     )}
                                                 </Container>

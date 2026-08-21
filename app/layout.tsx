@@ -19,6 +19,7 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://www.grequantschool.com"),
     title: "GRE Quant School",
     description: "GRE Quant School",
 };

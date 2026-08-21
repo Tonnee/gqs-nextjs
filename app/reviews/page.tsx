@@ -1,6 +1,7 @@
 import Contact from "@/features/home/components/contact";
 import MasterPieces from "@/features/home/components/master-pieces";
 import Reviews from "@/features/home/components/review";
+import SuccessStoriesSlider from "@/features/home/components/success-stories-slider";
 import UpcomingCourses from "@/features/home/components/upcoming-courses";
 import VisitSocial from "@/features/home/components/visit-social";
 import ReviewsList from "@/features/reviews/components/reviews-list";
@@ -14,12 +15,17 @@ export const metadata: Metadata = {
 export default function ReviewsPage() {
     return (
         <main className="min-h-screen">
-            <Reviews className="bg-primary" />
+            <Reviews
+                className="bg-primary"
+                ctaHref="#all-reviews-section"
+                ctaText="Explore All Testimonials"
+            />
             <ReviewsList />
+            <SuccessStoriesSlider />
             <MasterPieces />
             <UpcomingCourses />
             <VisitSocial />
-            <Contact/>
+            <Contact />
         </main>
     );
 }

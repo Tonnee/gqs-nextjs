@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
+import InstructorHero from "@/features/instructor-profile/components/instructor-hero";
+import InstructorProfileContent from "@/features/instructor-profile/components/instructor-profile-content";
+import MasterPieces from "@/features/home/components/master-pieces";
+import UpcomingCourses from "@/features/home/components/upcoming-courses";
+import VisitSocial from "@/features/home/components/visit-social";
+import Contact from "@/features/home/components/contact";
 
 export const metadata: Metadata = {
-    title: "Instructor Profile | GRE Quant School",
-    description: "Meet the founder and lead instructor of GRE Quant School.",
+    title: "Instructor Profile - Sourav Simanta | GRE Quant School",
+    description: "Learn more about Sourav Simanta, GRE Quant 170 scorer, PhD student at UMBC, and lead mentor at GRE Quant School.",
 };
 
 export default function InstructorProfilePage() {
     return (
-        <main className="flex min-h-screen flex-col items-center px-4 py-24 sm:px-6 lg:px-8">
-            <section className="mx-auto w-full max-w-7xl">
-                <header className="mb-12">
-                    <h1 className="font-poppins text-4xl font-bold tracking-tight text-primary-deep sm:text-5xl">
-                        Instructor Profile
-                    </h1>
-                </header>
-                <div className="font-raleway text-base text-neutral-600 leading-relaxed">
-                    <p>Learn more about our dedicated instructors and their extensive background in standardized testing.</p>
-                </div>
-            </section>
+        <main className="min-h-screen">
+            <InstructorHero />
+            <InstructorProfileContent />
+            <MasterPieces />
+            <UpcomingCourses />
+            <VisitSocial />
+            <Contact />
         </main>
     );
 }
+

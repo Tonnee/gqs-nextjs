@@ -8,13 +8,21 @@ import { cn } from "@/lib/utils";
 
 interface ReviewsProps {
     className?: string;
+    ctaHref?: string;
+    ctaText?: string;
+    showCta?: boolean;
 }
 
-export default function Reviews({ className }: ReviewsProps) {
+export default function Reviews({
+    className,
+    ctaHref = "/reviews",
+    ctaText = "See More Reviews",
+    showCta = true,
+}: ReviewsProps) {
     const isDark = className?.includes("bg-primary") || className?.includes("bg-primary-deep") || className?.includes("bg-accent-dark");
 
     return (
-        <section className={cn("py-16 md:py-28 mb-8 ", className)}>
+        <section className={cn("py-16 md:py-28", className)}>
             <Container>
                 <div className="flex flex-col items-center">
                     <SectionHeading
@@ -29,17 +37,19 @@ export default function Reviews({ className }: ReviewsProps) {
                         className={cn("mt-6 md:mt-8 mb-8 md:mb-10 text-center", isDark ? "text-white" : "")}
                     />
 
-                    <div className="text-center w-full flex justify-center mb-12 md:mb-16">
-                        <CtaButton
-                            href="/"
-                            baseColorClass={isDark ? "bg-white" : "bg-accent"}
-                            hoverColorClass={isDark ? "bg-accent" : "bg-primary"}
-                            textColorClass={isDark ? "text-primary hover:text-white" : "text-white hover:text-white"}
-                            className="px-8 py-3"
-                        >
-                            See More Reviews
-                        </CtaButton>
-                    </div>
+                    {showCta && (
+                        <div className="text-center w-full flex justify-center mb-12 md:mb-16">
+                            <CtaButton
+                                href={ctaHref}
+                                baseColorClass={isDark ? "bg-white" : "bg-accent"}
+                                hoverColorClass={isDark ? "bg-accent" : "bg-primary"}
+                                textColorClass={isDark ? "text-primary hover:text-white" : "text-white hover:text-white"}
+                                className="px-8 py-3"
+                            >
+                                {ctaText}
+                            </CtaButton>
+                        </div>
+                    )}
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-9 w-full justify-items-center">
                         {reviewCardData.map((cardItem, index) => (
